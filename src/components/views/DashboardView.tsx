@@ -55,11 +55,20 @@ export function DashboardView() {
 
   return (
     <motion.div 
-      className="space-y-8"
+      className="space-y-8 relative"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
+      {/* TOMBOL RAHASIA DI POJOK KANAN ATAS UNTUK MASUK KE ADMIN PANEL */}
+      <button
+        onClick={() => setMode('admin' as GameMode)}
+        className="absolute -top-4 right-0 font-mono text-[10px] text-slate-800 hover:text-red-500/70 transition-colors cursor-pointer z-50"
+        title="Access Core Database"
+      >
+        [ SYS_ADMIN ]
+      </button>
+
       <div className="flex items-center justify-between border-b border-slate-800 pb-6">
         <div>
           <h2 className="text-3xl font-bold text-white mb-2">System Dashboard</h2>

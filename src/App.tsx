@@ -6,6 +6,7 @@ import { DashboardView } from './components/views/DashboardView';
 import { SpotTheScamView } from './components/views/SpotTheScamView';
 import { VocabView } from './components/views/VocabView';
 import { SimulationView } from './components/views/SimulationView';
+import { AdminView } from './components/views/AdminView'; // IMPORT ROUTE ADMIN BARU
 
 function GameRouter() {
   const { currentMode } = useGameEngine();
@@ -32,6 +33,8 @@ function GameRouter() {
         return <SpotTheScamView />;
       case 'sim':
         return <SimulationView />;
+      case 'admin':
+        return <AdminView />; // ROUTE ADMIN BERHASIL DIDAFTARKAN
       case 'home':
       default:
         return <DashboardView />;
@@ -48,7 +51,7 @@ function GameRouter() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="fixed inset-0 z-100 bg-slate-950 flex flex-col items-center justify-center gap-4 border-b-2 border-cyan-500/50 shadow-[0_10px_50px_rgba(34,211,238,0.15)]"
+            className="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center gap-4 border-b-2 border-cyan-500/50 shadow-[0_10px_50px_rgba(34,211,238,0.15)]"
           >
             <motion.h1
               animate={{ opacity: [0.5, 1, 0.5] }}
@@ -63,7 +66,7 @@ function GameRouter() {
               transition={{ delay: 0.3 }}
               className="font-mono text-cyan-500/80 tracking-widest text-sm sm:text-base animate-pulse"
             >
-              ESTABLISHING SECURE CONNECTION...
+              {currentMode === 'admin' ? 'ACCESSING RESTRICTED ADMIN PANEL...' : 'ESTABLISHING SECURE CONNECTION...'}
             </motion.p>
           </motion.div>
         ) : (
