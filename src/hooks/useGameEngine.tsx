@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
-export type GameMode = 'home' | 'vocab' | 'quiz' | 'sim' | 'admin';
+export type GameMode = 'landing' | 'home' | 'vocab' | 'quiz' | 'sim' | 'admin';
 
 interface GameEngineState {
   userPoints: number;
@@ -20,7 +20,7 @@ const GameEngineContext = createContext<GameEngineState | undefined>(undefined);
 export function GameEngineProvider({ children }: { children: ReactNode }) {
   const [userPoints, setUserPoints] = useState<number>(0);
   const [masteredCount, setMasteredCount] = useState<number>(0);
-  const [currentMode, setCurrentMode] = useState<GameMode>('home');
+  const [currentMode, setCurrentMode] = useState<GameMode>('landing');
   const [playerName, setPlayerName] = useState<string>("Siswa Anonim");
   const [testType, setTestType] = useState<'Pre-Test' | 'Post-Test'>('Pre-Test');
 

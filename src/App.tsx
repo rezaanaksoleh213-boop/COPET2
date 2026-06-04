@@ -7,6 +7,7 @@ import { SpotTheScamView } from './components/views/SpotTheScamView';
 import { VocabView } from './components/views/VocabView';
 import { SimulationView } from './components/views/SimulationView';
 import { AdminView } from './components/views/AdminView'; // IMPORT ROUTE ADMIN BARU
+import {LandingPageView} from './components/views/LandingPageView'; // IMPORT LANDING PAGE VIEW
 
 function GameRouter() {
   const { currentMode } = useGameEngine();
@@ -27,6 +28,8 @@ function GameRouter() {
 
   const renderView = (mode: string) => {
     switch (mode) {
+      case 'landing':
+        return <LandingPageView />;
       case 'vocab':
         return <VocabView />;
       case 'quiz':
@@ -36,8 +39,9 @@ function GameRouter() {
       case 'admin':
         return <AdminView />; // ROUTE ADMIN BERHASIL DIDAFTARKAN
       case 'home':
-      default:
         return <DashboardView />;
+      default:
+        return <LandingPageView />;
     }
   };
 
