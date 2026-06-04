@@ -1,146 +1,325 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { quizScenarios } from '../../data/quizData';
 import { useGameEngine } from '../../hooks/useGameEngine';
-import { WhatsAppMockup } from '../ui/WhatsAppMockup';
-import { EmailMockup } from '../ui/EmailMockup';
-import { FeedbackDrawer } from '../ui/FeedbackDrawer';
-import { ShieldAlert, ShieldCheck, Trophy } from 'lucide-react';
+import { quizData } from '../../data/quizData';
+import { ShieldAlert, ArrowLeft, ChevronRight, Clock, AlertCircle, CheckCircle2, XCircle, Languages, Trophy, Unlock } from 'lucide-react';
 
 export function SpotTheScamView() {
-  const { addPoints, incrementMastered, setMode } = useGameEngine();
+  const { setMode, addPoints, unlockAchievement, unlockAdvancedLevel } = useGameEngine();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [feedbackOpen, setFeedbackOpen] = useState(false);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [isScanning, setIsScanning] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [isAnswered, setIsAnswered] = useState(false);
+  
+  // STATE TRACKER BARU
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+  const [pointsEarnedThisRound, setPointsEarnedThisRound] = useState(0);
+  const [isQuizFinished, setIsQuizFinished] = useState(false);
+  const [newAchievements, setNewAchievements] = useState<string[]>([]); // Cuma buat nampilin animasi popup akhir
 
-  // Completed State
-  if (currentIndex >= quizScenarios.length) {
+  const [showTranslation, setShowTranslation] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(15);
+  const [isTimeOut, setIsTimeOut] = useState(false);
+
+  const question = quizData[currentIndex];
+  const isLastQuestion = currentIndex === quizData.length - 1;
+
+  useEffect(() => {
+    if (timeLeft > 0 && !isAnswered && !isQuizFinished) {
+      const timerId = setTimeout(() => setTimeLeft(prev => prev - 1), 1000);
+      return () => clearTimeout(timerId);
+    } else if (timeLeft === 0 && !isAnswered) {
+      setIsTimeOut(true);
+      setIsAnswered(true);
+      setSelectedAnswer(-1);
+      setPointsEarnedThisRound(0);
+    }
+  }, [timeLeft, isAnswered, isQuizFinished]);
+
+  const handleSelect = (index: number) => {
+    if (isAnswered) return;
+    setSelectedAnswer(index);
+    setIsAnswered(true);
+
+    if (index === question.correctAnswerIndex) {
+      setCorrectAnswersCount(prev => prev + 1);
+      
+      // SISTEM SKOR: Poin Dasar (10) + Bonus Kecepatan (sisa waktu x 5)
+      const speedBonus = timeLeft * 5;
+      const totalPoints = 10 + speedBonus;
+      
+      setPointsEarnedThisRound(totalPoints);
+      addPoints(totalPoints); 
+    } else {
+      setPointsEarnedThisRound(0);
+    }
+  };
+
+  const handleNext = () => {
+    if (!isLastQuestion) {
+      setCurrentIndex(prev => prev + 1);
+      setSelectedAnswer(null);
+      setIsAnswered(false);
+      setTimeLeft(15); 
+      setIsTimeOut(false);
+      setShowTranslation(false);
+      setPointsEarnedThisRound(0);
+    } else {
+      calculateAchievements();
+    }
+  };
+
+  const calculateAchievements = () => {
+    setIsQuizFinished(true);
+    const earned: string[] = [];
+    
+    // LOGIKA ACHIEVEMENT
+    if (correctAnswersCount > 0) {
+      unlockAchievement("SCAM SURVIVOR");
+      earned.push("SCAM SURVIVOR");
+    }
+    
+    if (correctAnswersCount === quizData.length) {
+      unlockAchievement("SCAM HUNTER");
+      earned.push("SCAM HUNTER");
+      
+      // Zero Tolerance kalau bisa jawab sempurna dan poin kecepatan tinggi (asumsi total poin besar)
+      unlockAchievement("ZERO TOLERANCE");
+      earned.push("ZERO TOLERANCE");
+      
+      // UNLOCK LEVEL BARU karena udah master!
+      unlockAdvancedLevel();
+    }
+    
+    setNewAchievements(earned);
+  };
+
+  const getDifficultyColor = (level: string) => {
+    switch(level) {
+      case 'Easy': return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+      case 'Medium': return 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+      case 'Hard': return 'bg-rose-500/20 text-rose-400 border-rose-500/30';
+      case 'Expert': return 'bg-purple-500/20 text-purple-400 border-purple-500/30';
+      default: return 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30';
+    }
+  };
+
+  // TAMPILAN JIKA KUIS SELESAI (MISSION REPORT)
+  if (isQuizFinished) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 text-center animate-in fade-in duration-700">
-        <Trophy className="w-24 h-24 text-yellow-400 mb-6 drop-shadow-[0_0_20px_rgba(250,204,21,0.4)]" />
-        <h2 className="text-4xl font-bold text-white mb-4">Module Completed!</h2>
-        <p className="text-slate-400 mb-8 max-w-md">You have analyzed all active threats in this sector. Return to the dashboard for further training.</p>
-        <button 
-          onClick={() => setMode('home')} 
-          className="bg-slate-800 text-white px-6 py-3 rounded-xl border border-slate-700 hover:bg-slate-700 transition-colors shadow-lg"
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 relative">
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="bg-slate-900/80 backdrop-blur-md border border-indigo-500/50 p-8 md:p-12 rounded-3xl w-full max-w-2xl text-center shadow-[0_0_50px_rgba(99,102,241,0.2)]"
         >
-          Return to Dashboard
-        </button>
+          <ShieldAlert className="w-20 h-20 text-cyan-400 mx-auto mb-6" />
+          <h2 className="text-4xl font-bold text-white mb-2 tracking-widest">MISSION REPORT</h2>
+          <p className="text-slate-400 mb-8 font-mono">SCAM DETECTION EVALUATION COMPLETE</p>
+          
+          <div className="flex justify-center gap-8 mb-10">
+            <div className="bg-slate-950/50 p-6 rounded-2xl border border-slate-800">
+              <div className="text-5xl font-bold text-emerald-400 mb-2">{correctAnswersCount}/{quizData.length}</div>
+              <div className="text-xs text-slate-500 font-mono tracking-wider">ACCURACY</div>
+            </div>
+          </div>
+
+          {newAchievements.length > 0 && (
+            <div className="mb-10 text-left bg-slate-950/80 p-6 rounded-2xl border border-rose-500/30">
+              <h3 className="text-rose-400 font-mono text-sm mb-4 flex items-center gap-2">
+                <Trophy className="w-4 h-4" /> BADGES ACQUIRED
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {newAchievements.map(ach => (
+                  <span key={ach} className="bg-gradient-to-r from-rose-500/20 to-orange-500/20 border border-rose-500/50 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+                    {ach}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {correctAnswersCount === quizData.length && (
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }}
+              className="bg-cyan-500/20 border border-cyan-400 p-4 rounded-xl text-cyan-300 font-mono text-sm mb-8 flex items-center justify-center gap-3 animate-pulse"
+            >
+              <Unlock className="w-5 h-5" /> NEW SECURITY LEVEL UNLOCKED!
+            </motion.div>
+          )}
+
+          <button
+            onClick={() => setMode('home')}
+            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg text-lg"
+          >
+            RETURN TO DASHBOARD
+          </button>
+        </motion.div>
       </div>
     );
   }
 
-  const scenario = quizScenarios[currentIndex];
-
-  const handleAnswer = (userThinksScam: boolean) => {
-    setIsScanning(true);
-    const correct = userThinksScam === scenario.isScam;
-    
-    setTimeout(() => {
-      setIsScanning(false);
-      setIsCorrect(correct);
-      setFeedbackOpen(true);
-      
-      if (correct) {
-        addPoints(100);
-        incrementMastered();
-      }
-    }, 1500); // 1.5s delay for scanning animation
-  };
-
-  const handleNext = () => {
-    setFeedbackOpen(false);
-    setTimeout(() => {
-      setCurrentIndex(prev => prev + 1);
-      setIsCorrect(null);
-    }, 300); // Wait for drawer animation to close
-  };
-
+  // TAMPILAN KUIS NORMAL (Sama kayak sebelumnya, cuma ditambah Poin Didapat)
   return (
-    <div className="relative pb-32">
-      {/* Header Info */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-        <div>
-          <h2 className="text-2xl font-bold text-white mb-1">Spot the Scam</h2>
-          <p className="text-slate-400 text-sm">Analyze the communication below. Is it safe or a threat?</p>
-        </div>
-        <div className="bg-slate-900 border border-slate-800 px-4 py-2 rounded-lg text-sm font-mono text-cyan-400 shadow-sm flex items-center justify-center h-fit">
-          Case {currentIndex + 1} / {quizScenarios.length}
+    <div className="min-h-screen p-6 md:p-12 relative flex flex-col items-center">
+      {/* HEADER & NAVIGASI */}
+      <div className="w-full max-w-4xl flex justify-between items-center mb-8">
+        <button
+          onClick={() => setMode('home')}
+          className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 text-indigo-400 border border-indigo-500/30 rounded-lg backdrop-blur-sm transition-all"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span className="font-mono text-sm">MENU UTAMA</span>
+        </button>
+
+        <div className="flex gap-4">
+          <div className="bg-slate-900 border border-slate-800 px-4 py-2 rounded-lg text-sm font-mono text-indigo-400">
+            Case: {currentIndex + 1} / {quizData.length}
+          </div>
         </div>
       </div>
 
-      {/* Mockup Display with framer-motion */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={scenario.id}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.3 }}
-          className="flex justify-center mb-10 relative overflow-hidden rounded-3xl"
-        >
-          {scenario.platform === 'email' ? (
-            <EmailMockup 
-              senderName={scenario.senderName}
-              senderAddress={scenario.senderAddress}
-              subject={scenario.subject}
-              content={scenario.content}
-            />
-          ) : (
-            <WhatsAppMockup 
-              senderName={scenario.senderName}
-              message={scenario.content}
-            />
-          )}
+      <div className="w-full max-w-3xl flex flex-col items-center">
+        {/* JUDUL & LEVEL BADGE */}
+        <div className="flex flex-col items-center mb-6 w-full">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-2">
+            <ShieldAlert className="text-rose-400" /> Spot The Scam
+          </h2>
+          
+          <div className="flex items-center justify-between w-full bg-slate-900/80 p-4 rounded-xl border border-slate-700/50">
+            <span className={`px-3 py-1 rounded-full text-xs font-mono border ${getDifficultyColor(question.difficulty)}`}>
+              THREAT LEVEL: {question.difficulty.toUpperCase()}
+            </span>
 
-          {/* Laser Scanner Animation */}
-          {isScanning && (
+            <div className={`flex items-center gap-2 font-mono text-lg font-bold ${timeLeft <= 5 ? 'text-rose-500 animate-pulse' : 'text-cyan-400'}`}>
+              <Clock className="w-5 h-5" />
+              00:{timeLeft < 10 ? `0${timeLeft}` : timeLeft}
+            </div>
+          </div>
+        </div>
+
+        {/* AREA SKENARIO SOAL */}
+        <div className="w-full bg-slate-800/40 border border-indigo-500/20 p-6 md:p-8 rounded-2xl mb-4 shadow-lg backdrop-blur-sm relative overflow-hidden flex flex-col items-start">
+          {!isAnswered && (
             <motion.div 
-              className="absolute left-0 right-0 z-50 pointer-events-none"
-              initial={{ top: "-10%" }}
-              animate={{ top: "110%" }}
-              transition={{ duration: 1.5, ease: "linear" }}
-            >
-              <div className="h-1.5 bg-cyan-400 shadow-[0_0_20px_#22d3ee,0_0_40px_#22d3ee] w-full" />
-              <div className="h-32 bg-linear-to-b from-cyan-400/30 to-transparent w-full" />
-            </motion.div>
+              initial={{ width: "100%" }}
+              animate={{ width: "0%" }}
+              transition={{ duration: 15, ease: "linear" }}
+              className={`absolute top-0 left-0 h-1 ${timeLeft <= 5 ? 'bg-rose-500' : 'bg-cyan-500'}`}
+            />
           )}
-        </motion.div>
-      </AnimatePresence>
 
-      {/* Action Buttons */}
-      <div className="flex justify-center gap-6">
-        <button
-          onClick={() => handleAnswer(false)}
-          disabled={feedbackOpen || isScanning}
-          className="flex flex-col items-center gap-2 p-6 rounded-2xl border border-emerald-900 bg-emerald-900/20 hover:bg-emerald-900/40 hover:border-emerald-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed group w-40"
-        >
-          <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30">
-            <ShieldCheck className="w-6 h-6 text-emerald-400" />
-          </div>
-          <span className="font-semibold text-emerald-400">Safe</span>
-        </button>
+          <p className="text-slate-200 text-lg md:text-xl leading-relaxed">
+            "{question.scenarioEn}"
+          </p>
 
-        <button
-          onClick={() => handleAnswer(true)}
-          disabled={feedbackOpen || isScanning}
-          className="flex flex-col items-center gap-2 p-6 rounded-2xl border border-rose-900 bg-rose-900/20 hover:bg-rose-900/40 hover:border-rose-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed group w-40"
-        >
-          <div className="w-12 h-12 rounded-full bg-rose-500/20 flex items-center justify-center group-hover:bg-rose-500/30">
-            <ShieldAlert className="w-6 h-6 text-rose-400" />
-          </div>
-          <span className="font-semibold text-rose-400">Scam</span>
-        </button>
+          <AnimatePresence>
+            {showTranslation && (
+              <motion.p 
+                initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
+                className="text-slate-400 italic text-sm md:text-base mt-4 pt-4 border-t border-slate-700/50 w-full"
+              >
+                ID: "{question.scenarioId}"
+              </motion.p>
+            )}
+          </AnimatePresence>
+
+          <button 
+            onClick={() => setShowTranslation(!showTranslation)}
+            className="mt-6 px-4 py-2 bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 rounded-lg text-xs font-mono flex items-center gap-2 hover:bg-indigo-500/20 transition-colors self-end"
+          >
+            <Languages className="w-4 h-4" />
+            {showTranslation ? 'Sembunyikan Terjemahan' : 'Terjemahkan (ID)'}
+          </button>
+        </div>
+
+        {/* PILIHAN JAWABAN */}
+        <div className="w-full flex flex-col gap-3 mb-8">
+          {question.optionsEn.map((optionEn, index) => {
+            let btnClass = "bg-slate-900 border-slate-700 text-slate-300 hover:border-cyan-500/50 hover:bg-slate-800";
+            
+            if (isAnswered) {
+              if (index === question.correctAnswerIndex) {
+                btnClass = "bg-emerald-500/20 border-emerald-500 text-emerald-100"; 
+              } else if (index === selectedAnswer) {
+                btnClass = "bg-rose-500/20 border-rose-500 text-rose-100"; 
+              } else {
+                btnClass = "bg-slate-900 border-slate-800 text-slate-500 opacity-50"; 
+              }
+            }
+
+            return (
+              <button
+                key={index}
+                onClick={() => handleSelect(index)}
+                disabled={isAnswered}
+                className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center justify-between ${btnClass}`}
+              >
+                <div className="flex flex-col gap-1 w-11/12">
+                  <span className="text-base">{optionEn}</span>
+                  <AnimatePresence>
+                    {showTranslation && (
+                      <motion.span 
+                        initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
+                        className="text-xs text-slate-400/80 italic mt-1"
+                      >
+                        {question.optionsId[index]}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <div className="w-1/12 flex justify-end">
+                  {isAnswered && index === question.correctAnswerIndex && <CheckCircle2 className="w-5 h-5 text-emerald-500" />}
+                  {isAnswered && index === selectedAnswer && index !== question.correctAnswerIndex && <XCircle className="w-5 h-5 text-rose-500" />}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* FEEDBACK LANGSUNG & TOMBOL NEXT */}
+        {isAnswered && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            className={`w-full p-6 rounded-2xl mb-8 border relative ${
+              isTimeOut ? 'bg-amber-500/10 border-amber-500/30' : selectedAnswer === question.correctAnswerIndex ? 'bg-emerald-500/10 border-emerald-500/30' : 'bg-rose-500/10 border-rose-500/30'
+            }`}
+          >
+            {/* BADGE POIN KECEPATAN (Muncul kalau jawab bener) */}
+            {selectedAnswer === question.correctAnswerIndex && !isTimeOut && (
+               <div className="absolute -top-4 right-6 bg-emerald-500 text-slate-900 font-bold px-3 py-1 rounded-full text-sm animate-bounce shadow-lg border-2 border-emerald-200">
+                 +{pointsEarnedThisRound} PTS (Speed Bonus!)
+               </div>
+            )}
+
+            <div className="flex items-start gap-3">
+              <AlertCircle className={`w-6 h-6 shrink-0 mt-1 ${isTimeOut ? 'text-amber-500' : selectedAnswer === question.correctAnswerIndex ? 'text-emerald-500' : 'text-rose-500'}`} />
+              <div className="flex flex-col gap-2 w-full">
+                <h3 className={`text-lg font-bold ${isTimeOut ? 'text-amber-500' : selectedAnswer === question.correctAnswerIndex ? 'text-emerald-500' : 'text-rose-500'}`}>
+                  {isTimeOut ? "TIME'S UP!" : selectedAnswer === question.correctAnswerIndex ? "CORRECT ANALYSIS!" : "WARNING: YOU'VE BEEN SCAMMED!"}
+                </h3>
+                
+                <p className="text-slate-200 leading-relaxed text-sm md:text-base">
+                  {question.explanationEn}
+                </p>
+                
+                {showTranslation && (
+                  <p className="text-slate-400 italic leading-relaxed text-xs md:text-sm border-t border-slate-700/50 pt-2 mt-1">
+                    ID: {question.explanationId}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <button
+              onClick={handleNext}
+              className="w-full mt-6 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg"
+            >
+              {isLastQuestion ? 'Selesaikan Misi & Lihat Hasil' : 'Next Case'} <ChevronRight className="w-5 h-5" />
+            </button>
+          </motion.div>
+        )}
       </div>
-
-      <FeedbackDrawer
-        isOpen={feedbackOpen}
-        isCorrect={isCorrect}
-        explanation={scenario.explanation}
-        clues={scenario.clues}
-        onNext={handleNext}
-      />
     </div>
   );
 }

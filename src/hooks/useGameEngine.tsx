@@ -8,11 +8,15 @@ interface GameEngineState {
   currentMode: GameMode;
   playerName: string;
   testType: 'Pre-Test' | 'Post-Test';
+  achievements: string[]; // <--- TAMBAHAN BUAT PIALA
+  isAdvancedLevelUnlocked: boolean; // <--- TAMBAHAN BUAT UNLOCK LEVEL BARU
   setPlayerInfo: (name: string, type: 'Pre-Test' | 'Post-Test') => void;
   addPoints: (points: number) => void;
   incrementMastered: () => void;
   setMode: (mode: GameMode) => void;
   resetGame: () => void;
+  unlockAchievement: (achievement: string) => void;
+  unlockAdvancedLevel: () => void;
 }
 
 const GameEngineContext = createContext<GameEngineState | undefined>(undefined);
@@ -23,6 +27,8 @@ export function GameEngineProvider({ children }: { children: ReactNode }) {
   const [currentMode, setCurrentMode] = useState<GameMode>('landing');
   const [playerName, setPlayerName] = useState<string>("Siswa Anonim");
   const [testType, setTestType] = useState<'Pre-Test' | 'Post-Test'>('Pre-Test');
+  const [achievements, setAchievements] = useState<string[]>([]);
+  const [isAdvancedLevelUnlocked, setIsAdvancedLevelUnlocked] = useState<boolean>(false);
 
   const setPlayerInfo = (name: string, type: 'Pre-Test' | 'Post-Test') => {
     setPlayerName(name);
@@ -41,11 +47,27 @@ export function GameEngineProvider({ children }: { children: ReactNode }) {
     setCurrentMode(mode);
   };
 
+  // LOGIKA TAMBAH PIALA (Biar nggak dobel)
+  const unlockAchievement = (newAchievement: string) => {
+    setAchievements((prev) => {
+      if (!prev.includes(newAchievement)) {
+        return [...prev, newAchievement];
+      }
+      return prev;
+    });
+  };
+
+  const unlockAdvancedLevel = () => {
+    setIsAdvancedLevelUnlocked(true);
+  };
+
   const resetGame = () => {
     setUserPoints(0);
     setMasteredCount(0);
-    setCurrentMode('home');
+    setCurrentMode('landing');
     setPlayerName("Siswa Anonim");
+    setAchievements([]);
+    setIsAdvancedLevelUnlocked(false);
   };
 
   return (
@@ -56,11 +78,15 @@ export function GameEngineProvider({ children }: { children: ReactNode }) {
         currentMode,
         playerName,
         testType,
+        achievements,
+        isAdvancedLevelUnlocked,
         setPlayerInfo,
         addPoints,
         incrementMastered,
         setMode,
         resetGame,
+        unlockAchievement,
+        unlockAdvancedLevel,
       }}
     >
       {children}

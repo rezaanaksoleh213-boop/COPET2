@@ -1,67 +1,100 @@
-export type PlatformType = 'email' | 'whatsapp';
+export type DifficultyLevel = 'Easy' | 'Medium' | 'Hard' | 'Expert';
 
-export interface QuizScenario {
+export interface QuizQuestion {
   id: string;
-  platform: PlatformType;
-  senderName: string;
-  senderAddress?: string; // For emails
-  subject?: string; // For emails
-  content: string;
-  isScam: boolean;
-  explanation: string;
-  clues: string[];
+  difficulty: DifficultyLevel;
+  scenarioEn: string;
+  scenarioId: string;
+  optionsEn: string[];
+  optionsId: string[];
+  correctAnswerIndex: number;
+  explanationEn: string;
+  explanationId: string;
 }
 
-export const quizScenarios: QuizScenario[] = [
+export const quizData: QuizQuestion[] = [
   {
     id: 'q1',
-    platform: 'email',
-    senderName: 'PayPaI Support', // Notice the capital 'I' instead of 'l'
-    senderAddress: 'security@paypal-update-info.com',
-    subject: 'URGENT: Your account has been limited',
-    content: 'Dear Customer,\n\nWe noticed unusual activity on your account. To prevent immediate suspension, please click the link below to verify your identity within 24 hours.\n\n[Verify Account Now]',
-    isScam: true,
-    explanation: 'This is a classic phishing email. It uses a generic greeting ("Dear Customer"), artificial urgency ("immediate suspension", "within 24 hours"), a spoofed sender name (PayPaI with a capital I), and a fake domain (paypal-update-info.com).',
-    clues: ['Generic Greeting', 'Urgency', 'Fake Domain', 'Spoofed Name']
+    difficulty: 'Easy',
+    scenarioEn: 'You receive an SMS: "Congratulations! Your number has won Rp100 Million from Shopee. Click the following link to claim: http://shopee-hadiah-resmi.com". What do you do?',
+    scenarioId: 'Anda menerima SMS: "Selamat! Nomor Anda memenangkan Rp100 Juta dari Shopee. Klik link berikut untuk klaim: http://shopee-hadiah-resmi.com". Apa yang Anda lakukan?',
+    optionsEn: [
+      'Click the link because I frequently shop at Shopee.',
+      'Ignore and block the number because it is a scam.',
+      'Reply to the SMS to ask if it is true.',
+      'Share it with the family group so they can be happy too.'
+    ],
+    optionsId: [
+      'Klik link tersebut karena saya memang sering belanja di Shopee.',
+      'Abaikan dan blokir nomor tersebut karena itu penipuan.',
+      'Balas SMS untuk menanyakan kebenarannya.',
+      'Sebarkan ke grup keluarga biar mereka ikutan senang.'
+    ],
+    correctAnswerIndex: 1,
+    explanationEn: 'Scammers often use the lure of large prizes with fake links (phishing) to steal your data.',
+    explanationId: 'Scammer sering menggunakan iming-iming hadiah besar dengan link palsu (phishing) untuk mencuri data Anda.'
   },
   {
     id: 'q2',
-    platform: 'whatsapp',
-    senderName: '+62 812-3456-7890',
-    content: 'Hi Mom, I dropped my phone in the toilet and this is my new temporary number. I urgently need to pay a bill but my banking app is locked on the old phone. Can you transfer 500k to this virtual account? 8090123456.',
-    isScam: true,
-    explanation: 'This is the "Hey Mom/Dad" scam. Scammers impersonate family members using unknown numbers, create an emergency (broken phone), and ask for immediate financial help.',
-    clues: ['Unknown Number', 'Urgent Request for Money', 'Impersonation']
+    difficulty: 'Medium',
+    scenarioEn: 'Someone calls claiming to be from Bank BCA, stating there are suspicious transactions on your account and asks for the OTP code just sent via SMS to block it.',
+    scenarioId: 'Seseorang menelpon mengaku dari Bank BCA, mengatakan ada transaksi mencurigakan di rekening Anda dan meminta kode OTP yang baru saja dikirim via SMS untuk memblokirnya.',
+    optionsEn: [
+      'Give the OTP because they are an official bank employee trying to help.',
+      'Hang up and immediately contact HaloBCA from the official number.',
+      'Give half of the OTP code to test them.',
+      'Get angry at the caller.'
+    ],
+    optionsId: [
+      'Berikan OTP tersebut karena dia orang bank resmi yang mau membantu.',
+      'Tutup telepon dan segera hubungi HaloBCA dari nomor resmi.',
+      'Berikan setengah dari kode OTP untuk mengetes.',
+      'Marah-marah kepada penelepon.'
+    ],
+    correctAnswerIndex: 1,
+    explanationEn: 'Real bank officials NEVER ask for your OTP code, PIN, or Password for any reason.',
+    explanationId: 'Pihak bank asli TIDAK PERNAH meminta kode OTP, PIN, atau Password Anda dengan alasan apapun.'
   },
   {
     id: 'q3',
-    platform: 'email',
-    senderName: 'Spotify',
-    senderAddress: 'no-reply@spotify.com',
-    subject: 'Your receipt for Spotify Premium',
-    content: 'Hi Alex,\n\nThanks for your purchase. Your subscription for Spotify Premium has been renewed. Total: $9.99.\n\nIf you have any questions, visit our help center.',
-    isScam: false,
-    explanation: 'This is a legitimate receipt. It uses the user\'s actual name, comes from the official domain (@spotify.com), and does not ask for personal information or use threatening urgency.',
-    clues: ['Official Domain', 'Personalized Greeting', 'No Urgent Demands']
+    difficulty: 'Hard',
+    scenarioEn: 'You receive an email from "HRD Company X" (your target company) with a PDF attachment named "Form_Interview.exe".',
+    scenarioId: 'Anda mendapat email dari "HRD Perusahaan X" (perusahaan incaran Anda) dengan lampiran PDF bernama "Form_Interview.exe".',
+    optionsEn: [
+      'Immediately open the attachment so you do not miss the interview schedule.',
+      'Forward the email to a friend to have it checked.',
+      'Be suspicious because a PDF file cannot have a .exe extension, and delete it.',
+      'Reply to the email and ask for a different file format.'
+    ],
+    optionsId: [
+      'Segera buka lampiran tersebut agar tidak ketinggalan jadwal interview.',
+      'Forward email tersebut ke teman untuk dicek.',
+      'Curiga karena file PDF tidak mungkin berekstensi .exe, lalu menghapusnya.',
+      'Balas email tersebut dan minta format file lain.'
+    ],
+    correctAnswerIndex: 2,
+    explanationEn: 'Files with a .exe extension disguised as documents are usually Malware/Trojans ready to infect your device.',
+    explanationId: 'File berekstensi .exe yang disamarkan sebagai dokumen biasanya adalah Malware/Trojan yang siap menginfeksi perangkat Anda.'
   },
   {
     id: 'q4',
-    platform: 'email',
-    senderName: 'HR Department',
-    senderAddress: 'hr@yourcompany-portal.net',
-    subject: 'Action Required: Updated Employee Handbook',
-    content: 'Hello Team,\n\nPlease review the updated Employee Handbook for 2026 attached to this email. You must sign the acknowledgment page by EOD today.\n\nAttachment: Employee_Handbook_2026.pdf.exe',
-    isScam: true,
-    explanation: 'This is a malware distribution scam. The sender domain is suspicious (likely not the real company domain), it creates false urgency ("by EOD today"), and the attachment has a double extension (.pdf.exe) which means it is an executable malware file, not a PDF.',
-    clues: ['Suspicious Domain', 'Urgency', 'Dangerous Attachment (.exe)']
-  },
-  {
-    id: 'q5',
-    platform: 'whatsapp',
-    senderName: 'Shopee Promo',
-    content: '🎉 CONGRATULATIONS! 🎉\nYour number has been selected to win Rp 10.000.000 from the Shopee Mega Cashback Promo! 💰\n\nClick this link to claim your prize before it expires: http://shopee-claim-prize.vip/winner\n\nDo not share this code: 9942',
-    isScam: true,
-    explanation: 'This is a prize scam. Legitimate companies do not randomly select phone numbers for huge cash prizes. The link is a fake domain (not shopee.co.id), and it uses excessive emojis and false urgency.',
-    clues: ['Too Good to Be True', 'Fake Link', 'Unsolicited Prize']
+    difficulty: 'Expert',
+    scenarioEn: 'Your friend chats you on WhatsApp using a new number. Their writing style is very similar. They urgently ask to borrow money and provide a bank account under someone else\'s name.',
+    scenarioId: 'Teman Anda menge-chat di WhatsApp menggunakan nomor barunya. Gaya bahasanya sangat mirip. Ia meminta pinjaman uang mendesak dan memberikan nomor rekening bernama orang lain.',
+    optionsEn: [
+      'Transfer immediately out of pity since the writing style is so similar.',
+      'Call them on their old or new number, ask for a video call to confirm.',
+      'Ignore it because you do not have money right now.',
+      'Transfer a small amount just in case.'
+    ],
+    optionsId: [
+      'Langsung transfer karena kasihan dan gaya bahasanya sangat mirip.',
+      'Telepon dia ke nomor lama atau nomor baru tersebut, suruh dia video call untuk konfirmasi.',
+      'Abaikan saja karena Anda sedang tidak punya uang.',
+      'Transfer sebagian kecil saja untuk berjaga-jaga.'
+    ],
+    correctAnswerIndex: 1,
+    explanationEn: 'Social Engineering and Account Takeover techniques can mimic writing styles. Always verify via voice or video before transferring money to an unknown account.',
+    explanationId: 'Teknik Social Engineering dan Account Takeover bisa meniru gaya bahasa. Selalu verifikasi via suara atau video sebelum mentransfer uang ke rekening tak dikenal.'
   }
 ];
