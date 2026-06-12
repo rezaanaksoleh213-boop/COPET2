@@ -1,83 +1,67 @@
-import { motion } from 'framer-motion';
 import { useGameEngine } from '../../hooks/useGameEngine';
-import { ShieldAlert, Terminal, ChevronRight, AlertTriangle } from 'lucide-react';
+import { ShieldCheck, ArrowRight, ShieldAlert, Globe, Activity } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function LandingPageView() {
   const { setMode } = useGameEngine();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-6 relative overflow-hidden">
+      {/* Background Animasi Grid */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[length:32px_32px]" />
       
-      {/* Background Effects (Biar nuansa hacker / cyber-nya dapet) */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-        <div className="w-[600px] h-[600px] bg-cyan-600 rounded-full blur-[120px] mix-blend-screen"></div>
-        <div className="w-[400px] h-[400px] bg-indigo-600 rounded-full blur-[100px] mix-blend-screen absolute ml-40 mt-40"></div>
-      </div>
-
       <motion.div 
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="w-full max-w-4xl z-10 flex flex-col items-center"
+        className="w-full max-w-4xl text-center z-10"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-rose-500/10 border border-rose-500/30 rounded-full mb-8">
-          <AlertTriangle className="w-4 h-4 text-rose-400 animate-pulse" />
-          <span className="text-xs font-mono text-rose-400 tracking-widest uppercase">Classified Training Module</span>
+        <div className="inline-flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 text-rose-400 px-4 py-1.5 rounded-full text-xs font-mono mb-6 animate-pulse">
+          <ShieldAlert className="w-4 h-4" /> EMERGENCY_PROTOCOL_INITIALIZED
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold text-white tracking-widest mb-4 text-center drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">
-          PROJECT: <span className="text-cyan-400">COPET</span>
+        <h1 className="text-5xl md:text-8xl font-black mb-4 tracking-tighter leading-none">
+          CYBER LITERACY <br /> 
+          <span className="text-cyan-400">FOUNDATION</span>
         </h1>
-        
-        <p className="font-mono text-cyan-500/80 tracking-widest text-sm md:text-base mb-12 text-center">
-          CYBER OPERATIONS & PHISHING EVASION TRAINING
+
+        <p className="text-lg md:text-xl text-slate-400 font-mono mb-8 max-w-2xl mx-auto leading-relaxed">
+          Waktunya membekali diri dengan sistem COPET: Counter Penipuan Terintegrasi.
         </p>
 
-        {/* Kotak Penjelasan Konteks yang DETAIL */}
-        <div className="bg-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-2xl p-6 md:p-10 w-full mb-12 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-          <h2 className="text-xl md:text-2xl font-bold text-white mb-6 flex items-center gap-3 border-b border-slate-700/50 pb-4">
-            <ShieldAlert className="text-indigo-400" /> System Context & Objective
+        {/* FITUR BARU: BOX KASUS INDONESIA BAHASA INGGRIS */}
+        <div className="bg-rose-950/20 border border-rose-500/30 p-5 md:p-6 rounded-2xl mb-10 text-left backdrop-blur-sm shadow-[0_0_30px_rgba(244,63,94,0.1)]">
+          <h2 className="text-rose-400 font-mono text-sm md:text-base font-bold mb-3 flex items-center gap-2 uppercase">
+            <Activity className="w-5 h-5" /> Threat Intel: Indonesia Region
           </h2>
-          
-          <div className="space-y-5 text-slate-300 text-sm md:text-base leading-relaxed">
-            <p>
-              Selamat datang di <strong className="text-cyan-400">Project COPET</strong>. Sistem ini dirancang sebagai simulator imersif untuk melatih kepekaan Anda terhadap ancaman *Social Engineering* dan kejahatan siber modern.
-            </p>
-            <p>
-              Di dunia nyata, penjahat siber tidak lagi hanya meretas sistem, mereka meretas <strong className="text-rose-400">psikologi manusia</strong>. Mereka memanfaatkan manipulasi emosi—seperti menciptakan rasa panik (urgensi), menawarkan hadiah palsu, atau menyamar sebagai otoritas resmi (spoofing)—untuk mencuri kredensial dan data sensitif Anda.
-            </p>
-            <div className="bg-slate-950/80 p-4 rounded-lg border border-indigo-500/20 font-mono text-xs md:text-sm text-indigo-300">
-              <span className="block text-cyan-500 mb-2">&gt; MISSION DIRECTIVES:</span>
-              <ul className="list-disc list-inside space-y-1 ml-2 text-slate-400">
-                <li>Pelajari anatomi penipuan di <span className="text-white">Vocab Database</span>.</li>
-                <li>Uji insting Anda dalam <span className="text-white">Spot The Scam Quiz</span>.</li>
-                <li>Bertahan hidup dari skenario serangan di <span className="text-white">Live Simulation</span>.</li>
-              </ul>
-            </div>
+          <p className="text-slate-300 font-mono text-sm leading-relaxed border-l-2 border-rose-500 pl-4">
+            "Indonesia currently ranks 2nd globally among countries most vulnerable to online scams. Over 235 million internet users in the region face daily threats from advanced Social Engineering tactics, including APK phishing disguised as logistics couriers. Total financial losses in 2024 alone reached an estimated Rp 476 Billion."
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 text-left">
+          <div className="bg-slate-900/50 p-4 rounded-xl border border-slate-800 shadow-lg">
+            <Globe className="text-cyan-400 mb-2" />
+            <div className="text-xl font-bold font-mono">235 Million</div>
+            <div className="text-xs text-slate-500 font-mono">Vulnerable Users</div>
+          </div>
+          <div className="bg-slate-900/50 p-4 rounded-xl border border-slate-800 shadow-lg">
+            <ShieldAlert className="text-rose-500 mb-2" />
+            <div className="text-xl font-bold font-mono">Rp 476 Billion</div>
+            <div className="text-xs text-slate-500 font-mono">Lost to Scammers</div>
+          </div>
+          <div className="bg-slate-900/50 p-4 rounded-xl border border-slate-800 shadow-lg">
+            <ShieldCheck className="text-emerald-500 mb-2" />
+            <div className="text-xl font-bold font-mono">30+ Drills</div>
+            <div className="text-xs text-slate-500 font-mono">Security Vocabs</div>
           </div>
         </div>
 
-        {/* Tombol Masuk */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setMode('home')}
-          className="group relative flex items-center gap-3 bg-cyan-600 hover:bg-cyan-500 text-slate-950 px-10 py-4 rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_rgba(34,211,238,0.4)]"
+        <button
+          onClick={() => setMode('login')}
+          className="group bg-indigo-600 hover:bg-indigo-500 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all shadow-[0_0_30px_rgba(79,70,229,0.3)] flex items-center gap-3 mx-auto"
         >
-          <Terminal className="w-6 h-6" />
-          INITIALIZE SYSTEM
-          <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-          
-          {/* Efek scanline di tombol */}
-          <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
-            <div className="w-full h-[2px] bg-white/50 opacity-0 group-hover:opacity-100 group-hover:animate-scanline"></div>
-          </div>
-        </motion.button>
-        
-        <p className="mt-6 text-xs text-slate-500 font-mono">
-          Press to acknowledge and enter the dashboard.
-        </p>
-
+          MULAI OPERASI <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+        </button>
       </motion.div>
     </div>
   );

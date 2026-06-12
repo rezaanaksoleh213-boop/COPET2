@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GameEngineProvider, useGameEngine } from './hooks/useGameEngine';
 import { Layout } from './components/layout/Layout';
+import { LandingPageView } from './components/views/LandingPageView'; 
+import { LoginView } from './components/views/LoginView'; 
 import { DashboardView } from './components/views/DashboardView';
 import { SpotTheScamView } from './components/views/SpotTheScamView';
 import { VocabView } from './components/views/VocabView';
 import { SimulationView } from './components/views/SimulationView';
-import { AdminView } from './components/views/AdminView'; // IMPORT ROUTE ADMIN BARU
-import {LandingPageView} from './components/views/LandingPageView'; // IMPORT LANDING PAGE VIEW
+import { AdminView } from './components/views/AdminView'; 
 
 function GameRouter() {
-  const { currentMode } = useGameEngine();
+  const { currentMode, role } = useGameEngine();
   const [activeView, setActiveView] = useState(currentMode);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -21,15 +22,23 @@ function GameRouter() {
         setIsTransitioning(false);
         setActiveView(currentMode);
       }, 2000);
-
       return () => clearTimeout(timer);
     }
   }, [currentMode, activeView]);
 
   const renderView = (mode: string) => {
+    // 🛡️ SECURITY GUARD: Kalau belum milih role, user cuma boleh lihat Welcome / Login!
+    if (role === 'guest' && mode !== 'welcome' && mode !== 'login') {
+      return <LoginView />;
+    }
+
     switch (mode) {
-      case 'landing':
+      case 'welcome':
         return <LandingPageView />;
+      case 'login':
+        return <LoginView />;
+      case 'home':
+        return <DashboardView />;
       case 'vocab':
         return <VocabView />;
       case 'quiz':
@@ -37,8 +46,8 @@ function GameRouter() {
       case 'sim':
         return <SimulationView />;
       case 'admin':
-        return <AdminView />; // ROUTE ADMIN BERHASIL DIDAFTARKAN
-      case 'home':
+        // Proteksi: cuma role admin yang boleh tembus ke panel Admin
+        if (role === 'admin') return <AdminView />;
         return <DashboardView />;
       default:
         return <LandingPageView />;
