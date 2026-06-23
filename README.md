@@ -104,3 +104,71 @@ Aplikasi COPET telah dikembangkan menggunakan metode **ADDIE** (*Analysis, Desig
 ### 📊 6. Admin Panel Scoreboard (Tugas 1)
 - **User Score Tracking:** Menambahkan panel khusus admin (`AdminView.tsx`) untuk memantau data hasil pengujian skor akhir pengguna, mempermudah evaluasi efektivitas platform (analisis *pre-test* & *post-test*) sesuai metodologi evaluasi produk.
 ---
+
+## 🚀 Progres Pembaruan Fitur Terintegrasi
+
+Dokumen ini mencatat seluruh penambahan arsitektur sistem, peningkatan pengalaman pengguna (UX), serta mekanik gamifikasi yang berhasil diintegrasikan ke dalam ekosistem **COPET** malam ini.
+
+### 7. Advanced Landing Page & English Threat Intel
+* **Deskripsi:** Peningkatan bobot urgensi aplikasi pada halaman awal dengan menyajikan data statistik kejahatan siber berskala nasional menggunakan Bahasa Inggris.
+* **Fitur Utama:**
+  * Komponen *Threat Intel: Indonesia Region* yang menonjolkan posisi Indonesia sebagai negara peringkat ke-2 paling rawan penipuan daring global.
+  * Visualisasi data kerugian Rp 476 Miliar dan paparan risiko *Social Engineering* terhadap 235 juta pengguna internet aktif secara infografis.
+  * Meningkatkan impresi akademik di hadapan juri kompetisi sejak detikan pertama aplikasi dibuka.
+
+### 8. Multi-User Authentication Engine (Dynamic Personalization)
+* **Deskripsi:** Rombakan total pada gerbang masuk (`LoginView`) dari yang sebelumnya bersifat satu user statis (*single-tenant*) menjadi sistem multi-user dinamis berbasis input nama.
+* **Fitur Utama:**
+  * Form input *Agent Name* pada panel *User Operation*.
+  * Pemisahan *state* identitas digital: setiap nama baru yang diinput akan memiliki sesi pelatihan, penayangan nama profil, akumulasi poin net, serta pencatatan log evaluasi akhir yang unik dan terisolasi.
+  * Sinkronisasi data nama secara *real-time* ke panel *Restricted Admin System* (`ScoreLog`), mempermudah pengujian aplikasi oleh beberapa penguji/juri sekaligus tanpa tumpang tindih data.
+
+### 9. Optimized Session Lifecycle Router (UX Flow Fix)
+* **Deskripsi:** Perbaikan jalur navigasi (*routing workflow*) pada aksi penutupan sesi untuk menjaga kenyamanan pengalaman pengguna (UX).
+* **Fitur Utama:**
+  * Tombol **ABORT SESSION** (User) dan **TERMINATE SESSION** (Admin) kini secara logis mengarahkan pengguna kembali ke `LoginView` (Halaman Pilihan Role & Input Nama).
+  * Menghilangkan anomali alur di mana pengguna harus membaca ulang infografis *Landing Page* dari awal setiap kali ingin berganti akun atau peran.
+
+### 10. "Scam Reporter" Interactive Mini-Game
+* **Deskripsi:** Modul taktis pasca-kuis di akhir simulasi kasus yang melatih pengguna untuk bertindak aktif melaporkan kejahatan siber, bukan sekadar menghindar.
+* **Fitur Utama:**
+  * **Step 1 (Evidence Capture):** Fitur simulasi mengambil jepretan layar (*screenshot*) bukti chat penipuan bermodus `.apk` kurir ekspedisi J&T.
+  * **Step 2 (Channel Selection):** Labirin pilihan keputusan untuk menguji pengetahuan pengguna mengenai kanal aduan resmi.
+  * **Step 3 (Legal Redirection):** Integrasi tautan langsung (*hyperlink*) eksternal aman menuju portal resmi Pemerintah **https://aduannomor.id/** untuk aksi nyata di dunia riil.
+  * **Anti-Scam Squad Reward:** Bonus instan **+25 PTS** jika pengguna berhasil mengeksekusi pelaporan melalui kanal yang valid.
+
+### 11. Intelligent Personalized Learning Path (Adaptive Engine)
+* **Deskripsi:** Otak kecerdasan buatan (*Adaptive & Diagnostic Engine*) yang disuntikkan ke dalam sistem navigasi kuis (`SpotTheScamView`) untuk menyajikan kurikulum yang personal.
+* **Fitur Utama:**
+  * **Dynamic Adaptive Difficulty:** Tingkat kesulitan soal berikutnya (*Easy ➔ Medium ➔ Hard ➔ Expert*) akan naik secara otomatis jika pengguna menjawab benar, dan turun level jika pengguna menjawab salah secara *real-time*.
+  * **Diagnostic Tracker:** Melacak data kesalahan pengguna berdasarkan pengelompokan kategori taktik manipulasi psikologis penipu (*Urgency, Authority, Emotion, Greed*).
+  * **Fokus Area Recommendation:** Menampilkan analisis kelemahan radar siber pengguna pada layar *Mission Report* sebagai saran fokus area pembelajaran selanjutnya di menu *Vocab Drill*.
+
+### 12. Gamified Daily Streak & Mission Board
+* **Deskripsi:** Penerapan retensi psikologi game (*game theory engagement*) untuk memicu motivasi belajar harian siswa secara konsisten.
+* **Fitur Utama:**
+  * **Daily Streak Counter:** Indikator kobaran api siber (`Flame`) yang melacak keaktifan harian pengguna (Simulasi: *3 Days Streak*).
+  * **Daily Operational Missions:** Papan misi harian interaktif di dasbor user dengan target:
+    1. *Misi Kuis:* Deteksi 3 Red Flags Kuis (Terbuka/selesai otomatis setelah 3 kali menjawab benar).
+    2. *Misi Simulasi:* Menyelesaikan 1 sesi modul *Live Simulation*.
+  * **Claim Reward Engine:** Tombol klaim interaktif yang memberikan hadiah **+15 PTS** ke saldo poin net global jika misi berhasil diselesaikan.
+
+### 13. Progress Analytical HUD & Digital Portfolio Certificate
+* **Deskripsi:** Luaran konkret media pembelajaran berupa dasbor metrik performa serta sertifikat digital formal yang dapat digunakan siswa sebagai portofolio digital.
+* **Fitur Utama:**
+  * **Cyber Radar Analytics:** Tampilan grafik persentase kemahiran deteksi ancaman (`87% Scam Cues Terdeteksi`) dengan visualisasi *progress bar* melingkar/horizontal di sidebar kanan dasbor.
+  * **Automated Certificate Modal:** Jendela pop-up pratinjau sertifikat kelulusan estetik bertema militer siber yang mencetak nama agen `{playerName}` dan skor akhir `{userPoints}` secara dinamis.
+  * **Print-to-PDF Printface Isolation:** Menggunakan teknologi penataan `@media print` pada CSS untuk mengisolasi cetakan hanya pada area sertifikat berukuran A4 Landscape bersih, otomatis menyembunyikan elemen antarmuka website lainnya saat tombol di-klik.
+
+---
+
+## 📂 Berkas Arsitektur yang Diperbarui
+
+1. `src/hooks/useGameEngine.tsx` — Penambahan *state* global (`mistakes`, `scoreLogs`, `streakCount`, `missionProgress`) dan fungsi mekanik pemicu data.
+2. `src/components/views/DashboardView.tsx` — Implementasi tata letak Opsi 3 (*Vertical Command Center*), panel Misi Harian, baris *Live Threat Feed*, indikator api *streak*, serta modul pembungkus sertifikat kelulusan.
+3. `src/components/views/LoginView.tsx` — Integrasi komponen form kendali nama agen secara dinamis sebelum inisialisasi sesi.
+4. `src/components/views/LandingPageView.tsx` — Penyajian dokumentasi kasus siber regional Indonesia dalam Bahasa Inggris.
+5. `src/components/views/SpotTheScamView.tsx` — Penggabungan logika kuis adaptif, pencatatan tracker diagnostik, perbaikan *bug strict-mode index*, serta layar interaktif *Scam Reporter* (`aduannomor.id`).
+6. `src/components/ui/CertificateModal.tsx` — Pembuatan cetakan komponen HTML sertifikat kelulusan formal portofolio siswa.
+7. `src/index.css` — Penyuntikan aturan `@media print` untuk isolasi ekspor dokumen PDF landscape.
+8. `src/data/quizData.ts` — Pendaftaran properti opsional `category` pada struktur model data kuis TypeScript.

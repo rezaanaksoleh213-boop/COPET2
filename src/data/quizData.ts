@@ -10,6 +10,7 @@ export interface QuizQuestion {
   correctAnswerIndex: number;
   explanationEn: string;
   explanationId: string;
+  category?: string; // <-- Tuh Jott, ini kuncian biar nggak eror!
 }
 
 export const quizData: QuizQuestion[] = [
@@ -32,7 +33,8 @@ export const quizData: QuizQuestion[] = [
     ],
     correctAnswerIndex: 1,
     explanationEn: 'Scammers often use the lure of large prizes with fake links (phishing) to steal your data.',
-    explanationId: 'Scammer sering menggunakan iming-iming hadiah besar dengan link palsu (phishing) untuk mencuri data Anda.'
+    explanationId: 'Scammer sering menggunakan iming-iming hadiah besar dengan link palsu (phishing) untuk mencuri data Anda.',
+    category: 'Greed / Iming-iming' // <-- Kategori manipulasinya
   },
   {
     id: 'q2',
@@ -53,7 +55,8 @@ export const quizData: QuizQuestion[] = [
     ],
     correctAnswerIndex: 1,
     explanationEn: 'Real bank officials NEVER ask for your OTP code, PIN, or Password for any reason.',
-    explanationId: 'Pihak bank asli TIDAK PERNAH meminta kode OTP, PIN, atau Password Anda dengan alasan apapun.'
+    explanationId: 'Pihak bank asli TIDAK PERNAH meminta kode OTP, PIN, atau Password Anda dengan alasan apapun.',
+    category: 'Authority / Otoritas Palsu' // <-- Kategori manipulasinya
   },
   {
     id: 'q3',
@@ -74,7 +77,8 @@ export const quizData: QuizQuestion[] = [
     ],
     correctAnswerIndex: 2,
     explanationEn: 'Files with a .exe extension disguised as documents are usually Malware/Trojans ready to infect your device.',
-    explanationId: 'File berekstensi .exe yang disamarkan sebagai dokumen biasanya adalah Malware/Trojan yang siap menginfeksi perangkat Anda.'
+    explanationId: 'File berekstensi .exe yang disamarkan sebagai dokumen biasanya adalah Malware/Trojan yang siap menginfeksi perangkat Anda.',
+    category: 'Urgency / Desakan Waktu' // <-- Kategori manipulasinya
   },
   {
     id: 'q4',
@@ -95,6 +99,7 @@ export const quizData: QuizQuestion[] = [
     ],
     correctAnswerIndex: 1,
     explanationEn: 'Social Engineering and Account Takeover techniques can mimic writing styles. Always verify via voice or video before transferring money to an unknown account.',
-    explanationId: 'Teknik Social Engineering dan Account Takeover bisa meniru gaya bahasa. Selalu verifikasi via suara atau video sebelum mentransfer uang ke rekening tak dikenal.'
+    explanationId: 'Teknik Social Engineering dan Account Takeover bisa meniru gaya bahasa. Selalu verifikasi via suara atau video sebelum mentransfer uang ke rekening tak dikenal.',
+    category: 'Emotion / Manipulasi Emosi' // <-- Kategori manipulasinya
   }
 ];
