@@ -7,7 +7,6 @@ export function LandingPageView() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Background Animasi Grid */}
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[length:32px_32px]" />
       
       <motion.div 
@@ -18,17 +17,16 @@ export function LandingPageView() {
         <div className="inline-flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 text-rose-400 px-4 py-1.5 rounded-full text-xs font-mono mb-6 animate-pulse">
           <ShieldAlert className="w-4 h-4" /> EMERGENCY_PROTOCOL_INITIALIZED
         </div>
-
+        
         <h1 className="text-5xl md:text-8xl font-black mb-4 tracking-tighter leading-none">
           CYBER LITERACY <br /> 
-          <span className="text-cyan-400">FOUNDATION</span>
+          <span className="text-orange-500">FOUNDATION</span>
         </h1>
-
+        
         <p className="text-lg md:text-xl text-slate-400 font-mono mb-8 max-w-2xl mx-auto leading-relaxed">
           Waktunya membekali diri dengan sistem COPET: Counter Penipuan Terintegrasi.
         </p>
 
-        {/* FITUR BARU: BOX KASUS INDONESIA BAHASA INGGRIS */}
         <div className="bg-rose-950/20 border border-rose-500/30 p-5 md:p-6 rounded-2xl mb-10 text-left backdrop-blur-sm shadow-[0_0_30px_rgba(244,63,94,0.1)]">
           <h2 className="text-rose-400 font-mono text-sm md:text-base font-bold mb-3 flex items-center gap-2 uppercase">
             <Activity className="w-5 h-5" /> Threat Intel: Indonesia Region
@@ -40,7 +38,7 @@ export function LandingPageView() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 text-left">
           <div className="bg-slate-900/50 p-4 rounded-xl border border-slate-800 shadow-lg">
-            <Globe className="text-cyan-400 mb-2" />
+            <Globe className="text-teal-400 mb-2" />
             <div className="text-xl font-bold font-mono">235 Million</div>
             <div className="text-xs text-slate-500 font-mono">Vulnerable Users</div>
           </div>
@@ -58,7 +56,7 @@ export function LandingPageView() {
 
         <button
           onClick={() => setMode('login')}
-          className="group bg-indigo-600 hover:bg-indigo-500 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all shadow-[0_0_30px_rgba(79,70,229,0.3)] flex items-center gap-3 mx-auto"
+          className="group bg-orange-600 hover:bg-orange-500 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all shadow-[0_0_30px_rgba(249,115,22,0.3)] flex items-center gap-3 mx-auto"
         >
           MULAI OPERASI <ArrowRight className="group-hover:translate-x-2 transition-transform" />
         </button>
