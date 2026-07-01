@@ -12,11 +12,9 @@ const DIFFICULTY_LEVELS = ['Easy', 'Medium', 'Hard', 'Expert'];
 
 export function SpotTheScamView() {
   const { setMode, addPoints, unlockAchievement, unlockAdvancedLevel, saveScoreLog, recordMistake, getWeakestCategory, addQuizCorrectProgress } = useGameEngine();
-  
   const [visitedIndices, setVisitedIndices] = useState<number[]>([0]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentDiffIndex, setCurrentDiffIndex] = useState(0); 
-  
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
@@ -24,13 +22,13 @@ export function SpotTheScamView() {
   const [showTranslation, setShowTranslation] = useState(false);
   const [timeLeft, setTimeLeft] = useState(15);
   const [isTimeOut, setIsTimeOut] = useState(false);
-
   const [isReportingPhase, setIsReportingPhase] = useState(false);
   const [reportStep, setReportStep] = useState(1);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
   const [newAchievements, setNewAchievements] = useState<string[]>([]); 
 
-  const totalQuestionsToPlay = Math.min(4, quizData.length); 
+  // PERBAIKAN: Mengubah batas soal menjadi 15 (seluruh isi quizData)
+  const totalQuestionsToPlay = Math.min(15, quizData.length); 
   const isLastQuestion = visitedIndices.length >= totalQuestionsToPlay;
   const question = quizData[currentIndex] || quizData[0];
 
@@ -54,7 +52,6 @@ export function SpotTheScamView() {
     if (nextIdx === -1) {
       nextIdx = quizData.findIndex((_, idx) => !currentVisited.includes(idx));
     }
-
     if (nextIdx !== -1) {
       setCurrentIndex(nextIdx);
       setVisitedIndices(prev => [...prev, nextIdx]);
@@ -65,17 +62,13 @@ export function SpotTheScamView() {
     if (isAnswered) return;
     setSelectedAnswer(index);
     setIsAnswered(true);
-
     if (index === question.correctAnswerIndex) {
       setCorrectAnswersCount(prev => prev + 1);
       const speedBonus = timeLeft * 5;
       const totalPoints = 10 + speedBonus;
       setPointsEarnedThisRound(totalPoints);
-      addPoints(totalPoints); 
-      
-      // KODE INTEGRASI: Kirim progress jawaban benar ke misi harian di dashboard
+      addPoints(totalPoints);
       addQuizCorrectProgress(1);
-
       setCurrentDiffIndex(prev => Math.min(prev + 1, DIFFICULTY_LEVELS.length - 1));
     } else {
       setPointsEarnedThisRound(0);
@@ -109,8 +102,8 @@ export function SpotTheScamView() {
     setIsReportingPhase(false);
     setIsQuizFinished(true);
     const earned: string[] = [];
-    let highestBadge = "MEMBER BARU"; 
-    
+    let highestBadge = "MEMBER BARU";
+      
     if (correctAnswersCount > 0) {
       unlockAchievement("SCAM SURVIVOR");
       earned.push("SCAM SURVIVOR");
@@ -137,7 +130,7 @@ export function SpotTheScamView() {
       case 'Medium': return 'bg-amber-500/20 text-amber-400 border-amber-500/30';
       case 'Hard': return 'bg-rose-500/20 text-rose-400 border-rose-500/30';
       case 'Expert': return 'bg-purple-500/20 text-purple-400 border-purple-500/30';
-      default: return 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30';
+      default: return 'bg-orange-500/20 text-orange-400 border-orange-500/30';
     }
   };
 
@@ -146,9 +139,9 @@ export function SpotTheScamView() {
       <div className="min-h-screen flex flex-col items-center justify-center p-6 relative">
         <motion.div 
           initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-          className="bg-slate-900/80 backdrop-blur-md border border-indigo-500/50 p-8 md:p-12 rounded-3xl w-full max-w-2xl text-center shadow-[0_0_50px_rgba(99,102,241,0.2)]"
+          className="bg-slate-900/80 backdrop-blur-md border border-teal-500/50 p-8 md:p-12 rounded-3xl w-full max-w-2xl text-center shadow-[0_0_50px_rgba(45,212,191,0.2)]"
         >
-          <ShieldAlert className="w-20 h-20 text-cyan-400 mx-auto mb-6" />
+          <ShieldAlert className="w-20 h-20 text-orange-500 mx-auto mb-6" />
           <h2 className="text-4xl font-bold text-white mb-2 tracking-widest">MISSION REPORT</h2>
           <p className="text-slate-400 mb-8 font-mono">SCAM DETECTION EVALUATION COMPLETE</p>
           
@@ -184,7 +177,7 @@ export function SpotTheScamView() {
 
           <button
             onClick={() => setMode('home')}
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg text-lg tracking-wide font-mono"
+            className="w-full bg-orange-600 hover:bg-orange-500 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg text-lg tracking-wide font-mono"
           >
             RETURN TO DASHBOARD
           </button>
@@ -197,7 +190,7 @@ export function SpotTheScamView() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-6 relative">
         <div className="w-full max-w-3xl flex justify-between items-center mb-6">
-          <div className="text-cyan-400 font-mono text-sm font-bold flex items-center gap-2">
+          <div className="text-orange-500 font-mono text-sm font-bold flex items-center gap-2">
             <ShieldCheck className="w-5 h-5" /> SCAM_REPORTER_STATION
           </div>
           <div className="bg-slate-900 border border-slate-800 px-3 py-1 rounded text-xs font-mono text-slate-500">
@@ -207,13 +200,13 @@ export function SpotTheScamView() {
 
         <motion.div 
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="bg-slate-900/80 border border-indigo-500/30 p-6 md:p-8 rounded-3xl w-full max-w-3xl shadow-2xl relative overflow-hidden"
+          className="bg-slate-900/80 border border-teal-500/30 p-6 md:p-8 rounded-3xl w-full max-w-3xl shadow-2xl relative overflow-hidden"
         >
           {reportStep === 1 && (
             <div className="text-center">
               <h2 className="text-2xl font-bold text-white mb-2 font-mono">AMBIL BUKTI BERSALAH</h2>
               <p className="text-slate-400 mb-6 text-sm">Simulasi: Pelaku mengirimkan file berbahaya berkedok dokumen kurir ekspedisi. Amankan bukti screenshot sebelum memblokir!</p>
-              
+                
               <div className="bg-[#0b141a] border border-slate-800 rounded-2xl p-4 max-w-sm mx-auto text-left relative overflow-hidden shadow-2xl mb-8">
                 <div className="bg-[#202c33] -m-4 mb-4 p-3 flex items-center gap-3">
                   <div className="w-8 h-8 bg-slate-600 rounded-full flex items-center justify-center text-xs font-bold text-white">J&T</div>
@@ -233,7 +226,7 @@ export function SpotTheScamView() {
 
               <button
                 onClick={() => setReportStep(2)}
-                className="group inline-flex items-center gap-3 bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(79,70,229,0.4)] font-mono text-sm"
+                className="group inline-flex items-center gap-3 bg-orange-600 hover:bg-orange-500 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(249,115,22,0.4)] font-mono text-sm"
               >
                 <Camera className="w-5 h-5 group-active:scale-90 transition-transform" />
                 AMBIL SCREENSHOT BUKTI
@@ -255,9 +248,9 @@ export function SpotTheScamView() {
                   <span className="text-xs text-slate-400">Biar viral tanpa ada penutupan nomor resmi dari otoritas terkait.</span>
                 </button>
                 
-                <button onClick={() => handleReportSubmit(true)} className="bg-slate-800/60 hover:bg-indigo-950/40 border border-slate-700 hover:border-indigo-500/50 p-4 rounded-xl transition-colors w-full">
+                <button onClick={() => handleReportSubmit(true)} className="bg-slate-800/60 hover:bg-teal-950/40 border border-slate-700 hover:border-teal-500/50 p-4 rounded-xl transition-colors w-full">
                   <span className="block font-bold text-white flex items-center justify-between">
-                    Portal Otoritas AduanNomor.id <ShieldCheck className="w-4 h-4 text-cyan-400 animate-pulse" />
+                    Portal Otoritas AduanNomor.id <ShieldCheck className="w-4 h-4 text-orange-500 animate-pulse" />
                   </span>
                   <span className="text-xs text-slate-400">Melaporkan nomor ke database aduan resmi bentukan Kominfo agar diblokir permanen.</span>
                 </button>
@@ -286,12 +279,12 @@ export function SpotTheScamView() {
                 <a 
                   href="https://aduannomor.id/" 
                   target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-cyan-400 px-6 py-3 rounded-xl font-bold transition-colors border border-slate-700"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-orange-400 px-6 py-3 rounded-xl font-bold transition-colors border border-slate-700"
                 >
                   <ExternalLink className="w-4 h-4" /> KUNJUNGI ADUANNOMOR.ID
                 </a>
-                <button onClick={calculateAchievements} className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg">
+                <button onClick={calculateAchievements} className="flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-500 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg">
                   LIHAT MISSION REPORT <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
@@ -305,12 +298,12 @@ export function SpotTheScamView() {
   return (
     <div className="min-h-screen p-6 md:p-12 relative flex flex-col items-center">
       <div className="w-full max-w-4xl flex justify-between items-center mb-8">
-        <button onClick={() => setMode('home')} className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 text-indigo-400 border border-indigo-500/30 rounded-lg backdrop-blur-sm transition-all">
+        <button onClick={() => setMode('home')} className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 text-teal-400 border border-teal-500/30 rounded-lg backdrop-blur-sm transition-all">
           <ArrowLeft className="w-5 h-5" />
           <span className="font-mono text-sm">ABORT MISSION</span>
         </button>
         <div className="flex gap-4">
-          <div className="bg-slate-900 border border-slate-800 px-4 py-2 rounded-lg text-sm font-mono text-indigo-400">
+          <div className="bg-slate-900 border border-slate-800 px-4 py-2 rounded-lg text-sm font-mono text-teal-400">
             Misi Teruji: {visitedIndices.length} / {totalQuestionsToPlay}
           </div>
         </div>
@@ -326,23 +319,20 @@ export function SpotTheScamView() {
             <span className={`px-3 py-1 rounded-full text-xs font-mono border ${getDifficultyColor(question.difficulty)}`}>
               THREAT LEVEL: {question.difficulty.toUpperCase()}
             </span>
-
-            <div className={`flex items-center gap-2 font-mono text-lg font-bold ${timeLeft <= 5 ? 'text-rose-500 animate-pulse' : 'text-cyan-400'}`}>
+            <div className={`flex items-center gap-2 font-mono text-lg font-bold ${timeLeft <= 5 ? 'text-rose-500 animate-pulse' : 'text-orange-500'}`}>
               <Clock className="w-5 h-5" />
               00:{timeLeft < 10 ? `0${timeLeft}` : timeLeft}
             </div>
           </div>
         </div>
 
-        <div className="w-full bg-slate-800/40 border border-indigo-500/20 p-6 md:p-8 rounded-2xl mb-4 shadow-lg backdrop-blur-sm relative overflow-hidden flex flex-col items-start">
+        <div className="w-full bg-slate-800/40 border border-teal-500/20 p-6 md:p-8 rounded-2xl mb-4 shadow-lg backdrop-blur-sm relative overflow-hidden flex flex-col items-start">
           {!isAnswered && (
-            <motion.div initial={{ width: "100%" }} animate={{ width: "0%" }} transition={{ duration: 15, ease: "linear" }} className={`absolute top-0 left-0 h-1 ${timeLeft <= 5 ? 'bg-rose-500' : 'bg-cyan-500'}`} />
+            <motion.div initial={{ width: "100%" }} animate={{ width: "0%" }} transition={{ duration: 15, ease: "linear" }} className={`absolute top-0 left-0 h-1 ${timeLeft <= 5 ? 'bg-rose-500' : 'bg-orange-500'}`} />
           )}
-
           <p className="text-slate-200 text-lg md:text-xl leading-relaxed">
             "{question.scenarioEn}"
           </p>
-
           <AnimatePresence>
             {showTranslation && (
               <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-slate-400 italic text-sm md:text-base mt-4 pt-4 border-t border-slate-700/50 w-full">
@@ -351,7 +341,7 @@ export function SpotTheScamView() {
             )}
           </AnimatePresence>
 
-          <button onClick={() => setShowTranslation(!showTranslation)} className="mt-6 px-4 py-2 bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 rounded-lg text-xs font-mono flex items-center gap-2 hover:bg-indigo-500/20 transition-colors self-end">
+          <button onClick={() => setShowTranslation(!showTranslation)} className="mt-6 px-4 py-2 bg-teal-500/10 text-teal-400 border border-teal-500/30 rounded-lg text-xs font-mono flex items-center gap-2 hover:bg-teal-500/20 transition-colors self-end">
             <Languages className="w-4 h-4" />
             {showTranslation ? 'Sembunyikan Terjemahan' : 'Terjemahkan (ID)'}
           </button>
@@ -359,7 +349,7 @@ export function SpotTheScamView() {
 
         <div className="w-full flex flex-col gap-3 mb-8">
           {question.optionsEn.map((optionEn, index) => {
-            let btnClass = "bg-slate-900 border-slate-700 text-slate-300 hover:border-cyan-500/50 hover:bg-slate-800";
+            let btnClass = "bg-slate-900 border-slate-700 text-slate-300 hover:border-orange-500/50 hover:bg-slate-800";
             
             if (isAnswered) {
               if (index === question.correctAnswerIndex) {
@@ -415,7 +405,7 @@ export function SpotTheScamView() {
                 )}
               </div>
             </div>
-            <button onClick={handleNext} className="w-full mt-6 flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg font-mono text-sm tracking-wide">
+            <button onClick={handleNext} className="w-full mt-6 flex justify-center items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg font-mono text-sm tracking-wide">
               {isLastQuestion ? 'PROSES EVALUASI & ADUAN' : 'NEXT CASE'} <ChevronRight className="w-5 h-5" />
             </button>
           </motion.div>
