@@ -8,7 +8,7 @@ import { DashboardView } from './components/views/DashboardView';
 import { SpotTheScamView } from './components/views/SpotTheScamView';
 import { VocabView } from './components/views/VocabView';
 import { SimulationView } from './components/views/SimulationView';
-import { AdminView } from './components/views/AdminView'; 
+import { AdminView } from './components/views/AdminView';
 
 function GameRouter() {
   const { currentMode, role } = useGameEngine();
@@ -27,30 +27,20 @@ function GameRouter() {
   }, [currentMode, activeView]);
 
   const renderView = (mode: string) => {
-    // 🛡️ SECURITY GUARD: Kalau belum milih role, user cuma boleh lihat Welcome / Login!
     if (role === 'guest' && mode !== 'welcome' && mode !== 'login') {
       return <LoginView />;
     }
-
     switch (mode) {
-      case 'welcome':
-        return <LandingPageView />;
-      case 'login':
-        return <LoginView />;
-      case 'home':
-        return <DashboardView />;
-      case 'vocab':
-        return <VocabView />;
-      case 'quiz':
-        return <SpotTheScamView />;
-      case 'sim':
-        return <SimulationView />;
-      case 'admin':
-        // Proteksi: cuma role admin yang boleh tembus ke panel Admin
+      case 'welcome': return <LandingPageView />;
+      case 'login': return <LoginView />;
+      case 'home': return <DashboardView />;
+      case 'vocab': return <VocabView />;
+      case 'quiz': return <SpotTheScamView />;
+      case 'sim': return <SimulationView />;
+      case 'admin': 
         if (role === 'admin') return <AdminView />;
         return <DashboardView />;
-      default:
-        return <LandingPageView />;
+      default: return <LandingPageView />;
     }
   };
 
@@ -64,20 +54,20 @@ function GameRouter() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center gap-4 border-b-2 border-cyan-500/50 shadow-[0_10px_50px_rgba(34,211,238,0.15)]"
+            className="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center gap-4 border-b-2 border-orange-500/50 shadow-[0_10px_50px_rgba(249,115,22,0.15)]"
           >
             <motion.h1
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ repeat: Infinity, duration: 1.5 }}
-              className="text-5xl md:text-7xl font-bold text-white tracking-widest drop-shadow-[0_0_25px_rgba(34,211,238,0.6)]"
+              className="text-5xl md:text-7xl font-bold text-white tracking-widest drop-shadow-[0_0_25px_rgba(249,115,22,0.6)]"
             >
-              CO<span className="text-cyan-400">PET</span>
+              CO<span className="text-orange-500">PET</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="font-mono text-cyan-500/80 tracking-widest text-sm sm:text-base animate-pulse"
+              className="font-mono text-teal-400 tracking-widest text-sm sm:text-base animate-pulse"
             >
               {currentMode === 'admin' ? 'ACCESSING RESTRICTED ADMIN PANEL...' : 'ESTABLISHING SECURE CONNECTION...'}
             </motion.p>
