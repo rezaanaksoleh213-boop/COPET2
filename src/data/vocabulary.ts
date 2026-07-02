@@ -1,3 +1,12 @@
+export type VocabCategory = 
+  | 'Phishing' 
+  | 'Romance Scam' 
+  | 'Investment Scam' 
+  | 'Job Scam' 
+  | 'Prize Scam' 
+  | 'Tech Support Scam' 
+  | 'Government Impersonation';
+
 export interface VocabularyItem {
   id: string;
   word: string;
@@ -6,258 +15,301 @@ export interface VocabularyItem {
   languageCue: string;
   indonesianMeaning: string;
   indonesianExample: string;
-  category: 'Scam Tactic' | 'Security Concept' | 'Language Clue';
+  category: VocabCategory;
 }
 
 export const vocabulary: VocabularyItem[] = [
+  // --- 1. PHISHING ---
   {
-    id: 'v1',
-    word: 'Phishing',
-    definition: 'A fraudulent attempt to obtain sensitive information by disguising as a trustworthy entity in electronic communication.',
+    id: 'ph1', word: 'Phishing', category: 'Phishing',
+    definition: 'A fraudulent attempt to obtain sensitive information by disguising as a trustworthy entity.',
     englishExample: 'The email looked like it was from my bank, but it was a phishing scam.',
     languageCue: 'from my bank',
-    indonesianMeaning: 'Upaya penipuan untuk mendapatkan informasi sensitif dengan menyamar sebagai pihak tepercaya dalam komunikasi elektronik.',
-    indonesianExample: 'Email itu terlihat seperti dari bank saya, tapi ternyata itu adalah penipuan phishing.',
-    category: 'Scam Tactic'
+    indonesianMeaning: 'Upaya penipuan untuk mendapatkan informasi sensitif dengan menyamar sebagai pihak tepercaya.',
+    indonesianExample: 'Email itu terlihat seperti dari bank saya, tapi ternyata itu adalah penipuan phishing.'
   },
   {
-    id: 'v2',
-    word: 'Urgency',
-    definition: 'Creating a false sense of time pressure to force the victim into making a quick, unthinking decision.',
-    englishExample: 'The message used urgency, claiming my account would be locked in 24 hours.',
-    languageCue: 'locked in 24 hours',
-    indonesianMeaning: 'Menciptakan tekanan waktu palsu untuk memaksa korban mengambil keputusan cepat tanpa berpikir panjang.',
-    indonesianExample: 'Pesan tersebut menggunakan urgensi, mengklaim akun saya akan dikunci dalam 24 jam.',
-    category: 'Language Clue'
+    id: 'ph2', word: 'Spoofing', category: 'Phishing',
+    definition: 'Falsifying data to disguise an unknown source as a known, trusted source.',
+    englishExample: 'The sender address used spoofing; it said Apple, but the email was random.',
+    languageCue: 'email was random',
+    indonesianMeaning: 'Memalsukan data untuk menyamarkan sumber yang tidak dikenal sebagai sumber yang tepercaya.',
+    indonesianExample: 'Alamat pengirim menggunakan spoofing; namanya Apple, tapi email aslinya acak.'
   },
   {
-    id: 'v3',
-    word: 'Spoofing',
-    definition: 'Falsifying data to disguise an unknown source as a known, trusted source (e.g., faking an email address).',
-    englishExample: 'The sender address was a classic case of spoofing; the display name said Apple, but the email was completely random.',
-    languageCue: 'email was completely random',
-    indonesianMeaning: 'Memalsukan data untuk menyamarkan sumber yang tidak dikenal sebagai sumber yang tepercaya (misal, memalsukan alamat email).',
-    indonesianExample: 'Alamat pengirim adalah kasus spoofing klasik; nama tampilan mengatakan Apple, tapi email aslinya benar-benar acak.',
-    category: 'Scam Tactic'
+    id: 'ph3', word: 'Malicious Link', category: 'Phishing',
+    definition: 'A web link designed to direct users to a compromised or fake website.',
+    englishExample: 'The SMS contained a malicious link disguised as a package tracker.',
+    languageCue: 'disguised as a package tracker',
+    indonesianMeaning: 'Tautan web yang dirancang untuk mengarahkan pengguna ke situs web palsu atau berbahaya.',
+    indonesianExample: 'SMS tersebut berisi tautan berbahaya yang disamarkan sebagai pelacak paket.'
   },
   {
-    id: 'v4',
-    word: 'Credentials',
-    definition: 'Information used to verify identity, such as passwords, PINs, or security questions.',
-    englishExample: 'Never share your login credentials with anyone over chat.',
-    languageCue: 'share your login credentials',
-    indonesianMeaning: 'Informasi yang digunakan untuk memverifikasi identitas, seperti kata sandi, PIN, atau pertanyaan keamanan.',
-    indonesianExample: 'Jangan pernah membagikan kredensial login Anda kepada siapapun melalui chat.',
-    category: 'Security Concept'
-  },
-  {
-    id: 'v5',
-    word: 'Suspicious',
-    definition: 'Causing a feeling that something is wrong or illegal.',
-    englishExample: 'The grammar mistakes in the official email made it look highly suspicious.',
-    languageCue: 'grammar mistakes',
-    indonesianMeaning: 'Menimbulkan perasaan bahwa ada sesuatu yang salah atau mencurigakan.',
-    indonesianExample: 'Kesalahan tata bahasa di email resmi itu membuatnya terlihat sangat mencurigakan.',
-    category: 'Language Clue'
-  },
-  {
-    id: 'v6',
-    word: 'Legitimate',
-    definition: 'Conforming to the law or to rules; genuine and real.',
-    englishExample: 'Always verify that a website is legitimate before entering your credit card details.',
-    languageCue: 'entering your credit card',
-    indonesianMeaning: 'Sesuai dengan hukum atau aturan; asli dan sah.',
-    indonesianExample: 'Selalu verifikasi bahwa sebuah situs web itu sah sebelum memasukkan detail kartu kredit Anda.',
-    category: 'Security Concept'
-  },
-  {
-    id: 'v7',
-    word: 'Malware',
-    definition: 'Software that is specifically designed to disrupt, damage, or gain unauthorized access to a computer system.',
-    englishExample: 'Opening the suspicious attachment installed malware on his laptop.',
-    languageCue: 'suspicious attachment',
-    indonesianMeaning: 'Perangkat lunak yang dirancang khusus untuk mengganggu, merusak, atau mendapatkan akses tidak sah ke sistem komputer.',
-    indonesianExample: 'Membuka lampiran mencurigakan itu menginstal malware di laptopnya.',
-    category: 'Scam Tactic'
-  },
-  {
-    id: 'v8',
-    word: 'Verify',
-    definition: 'Make sure or demonstrate that something is true, accurate, or justified.',
-    englishExample: 'Please verify the sender\'s email address by hovering over their name.',
-    languageCue: 'hovering over their name',
-    indonesianMeaning: 'Memastikan atau menunjukkan bahwa sesuatu itu benar, akurat, atau dapat dibenarkan.',
-    indonesianExample: 'Harap verifikasi alamat email pengirim dengan mengarahkan kursor ke atas nama mereka.',
-    category: 'Security Concept'
-  },
-  {
-    id: 'v9',
-    word: 'Generic Greeting',
-    definition: 'Using non-specific terms like "Dear Customer" instead of your actual name, often a sign of mass-phishing.',
-    englishExample: 'The email started with a generic greeting, which was the first red flag.',
+    id: 'ph4', word: 'Generic Greeting', category: 'Phishing',
+    definition: 'Using non-specific terms like "Dear Customer" instead of your actual name.',
+    englishExample: 'The warning email started with a generic greeting, which was a red flag.',
     languageCue: 'generic greeting',
-    indonesianMeaning: 'Menggunakan istilah tidak spesifik seperti "Pelanggan Yth" alih-alih nama asli Anda, sering kali merupakan tanda penipuan massal.',
-    indonesianExample: 'Email itu dimulai dengan sapaan generik, yang merupakan tanda bahaya pertama.',
-    category: 'Language Clue'
+    indonesianMeaning: 'Menggunakan istilah tidak spesifik seperti "Pelanggan Yth" alih-alih nama asli Anda.',
+    indonesianExample: 'Email peringatan itu dimulai dengan sapaan generik, yang merupakan tanda bahaya.'
   },
   {
-    id: 'v10',
-    word: 'Social Engineering',
-    definition: 'The use of deception to manipulate individuals into divulging confidential or personal information.',
-    englishExample: 'The scammer used social engineering to convince the employee to reset the system password.',
-    languageCue: 'reset the system password',
-    indonesianMeaning: 'Penggunaan penipuan untuk memanipulasi individu agar memberikan informasi rahasia atau pribadi.',
-    indonesianExample: 'Penipu tersebut menggunakan rekayasa sosial untuk meyakinkan karyawan agar mereset kata sandi sistem.',
-    category: 'Scam Tactic'
+    id: 'ph5', word: 'Typosquatting', category: 'Phishing',
+    definition: 'Registering a domain name that is a misspelled version of a popular website.',
+    englishExample: 'I was tricked by typosquatting because the URL was netfiix.com instead of netflix.',
+    languageCue: 'netfiix.com',
+    indonesianMeaning: 'Mendaftarkan nama domain yang salah ketik dari situs populer untuk menipu pengguna.',
+    indonesianExample: 'Saya tertipu typosquatting karena URL-nya netfiix.com, bukan netflix.'
+  },
+
+  // --- 2. ROMANCE SCAM ---
+  {
+    id: 'rs1', word: 'Romance Scam', category: 'Romance Scam',
+    definition: 'A scheme where a scammer feigns romantic interest to gain affection and money.',
+    englishExample: 'After two weeks of chatting, the romance scammer asked for money.',
+    languageCue: 'asked for money',
+    indonesianMeaning: 'Penipuan di mana pelaku memalsukan ketertarikan romantis untuk mendapatkan uang.',
+    indonesianExample: 'Setelah dua minggu mengobrol, penipu asmara itu meminta uang.'
   },
   {
-    id: 'v11',
-    word: 'Smishing',
-    definition: 'Phishing attacks conducted via SMS or text messages.',
-    englishExample: 'The smishing text asked me to click a link to claim a package.',
-    languageCue: 'click a link to claim a package',
-    indonesianMeaning: 'Serangan phishing yang dilakukan melalui SMS atau pesan teks singkat.',
-    indonesianExample: 'Teks smishing itu meminta saya mengklik tautan untuk mengklaim paket.',
-    category: 'Scam Tactic'
+    id: 'rs2', word: 'Love Bombing', category: 'Romance Scam',
+    definition: 'Overwhelming someone with signs of affection to manipulate them.',
+    englishExample: 'He used love bombing by declaring you are his soulmate on the second day.',
+    languageCue: 'you are his soulmate',
+    indonesianMeaning: 'Menghujani seseorang dengan kasih sayang berlebihan untuk memanipulasi mereka.',
+    indonesianExample: 'Dia menggunakan love bombing dengan menyatakan Anda belahan jiwanya di hari kedua.'
   },
   {
-    id: 'v12',
-    word: 'Vishing',
-    definition: 'Voice phishing, where scammers use phone calls to trick victims into providing sensitive data.',
-    englishExample: 'I received a vishing call from someone claiming to be the tax office.',
-    languageCue: 'claiming to be the tax office',
-    indonesianMeaning: 'Phishing suara, di mana penipu menggunakan panggilan telepon untuk mengelabui korban agar memberikan data sensitif.',
-    indonesianExample: 'Saya menerima panggilan vishing dari seseorang yang mengaku dari kantor pajak.',
-    category: 'Scam Tactic'
+    id: 'rs3', word: 'Catfishing', category: 'Romance Scam',
+    definition: 'Creating a fictional persona or fake identity on a social network.',
+    englishExample: 'She discovered he was catfishing when his photos turned out to be from a model.',
+    languageCue: 'photos turned out to be from a model',
+    indonesianMeaning: 'Membuat persona atau identitas palsu di jejaring sosial.',
+    indonesianExample: 'Dia menyadari pria itu catfishing saat tahu fotonya adalah milik seorang model.'
   },
   {
-    id: 'v13',
-    word: 'Ransomware',
-    definition: 'A type of malicious software designed to block access to a computer system until a sum of money is paid.',
-    englishExample: 'The ransomware locked all my files and demanded bitcoin to unlock them.',
-    languageCue: 'demanded bitcoin',
-    indonesianMeaning: 'Jenis perangkat lunak berbahaya yang dirancang untuk memblokir akses ke sistem komputer sampai sejumlah uang dibayarkan.',
-    indonesianExample: 'Ransomware itu mengunci semua file saya dan menuntut bitcoin untuk membukanya.',
-    category: 'Scam Tactic'
+    id: 'rs4', word: 'Fake Emergency', category: 'Romance Scam',
+    definition: 'A fabricated crisis used to create urgency and ask for immediate financial help.',
+    englishExample: 'He claimed he was in a hospital abroad and needed money for a fake emergency.',
+    languageCue: 'in a hospital abroad',
+    indonesianMeaning: 'Krisis rekayasa yang digunakan untuk menciptakan urgensi dan meminta bantuan finansial.',
+    indonesianExample: 'Dia mengklaim berada di rumah sakit luar negeri dan butuh uang untuk keadaan darurat palsu.'
   },
   {
-    id: 'v14',
-    word: 'Ponzi Scheme',
-    definition: 'A form of fraud that lures investors and pays profits to earlier investors with funds from more recent investors.',
+    id: 'rs5', word: 'Sweetheart Swindle', category: 'Romance Scam',
+    definition: 'Another term for romance scam, focusing on exploiting emotional vulnerability.',
+    englishExample: 'The sweetheart swindle left her brokenhearted and heavily in debt.',
+    languageCue: 'heavily in debt',
+    indonesianMeaning: 'Istilah lain untuk penipuan asmara, berfokus pada eksploitasi kerentanan emosional.',
+    indonesianExample: 'Penipuan asmara itu meninggalkannya patah hati dan terlilit utang besar.'
+  },
+
+  // --- 3. INVESTMENT SCAM ---
+  {
+    id: 'is1', word: 'Ponzi Scheme', category: 'Investment Scam',
+    definition: 'Paying profits to earlier investors with funds from more recent investors.',
     englishExample: 'The promised 50% daily return was just a classic Ponzi scheme.',
     languageCue: '50% daily return',
-    indonesianMeaning: 'Bentuk penipuan yang memikat investor dan membayar keuntungan kepada investor lama dengan dana dari investor yang lebih baru.',
-    indonesianExample: 'Janji keuntungan 50% per hari itu hanyalah skema Ponzi klasik.',
-    category: 'Scam Tactic'
+    indonesianMeaning: 'Membayar keuntungan kepada investor lama dengan dana dari investor yang lebih baru.',
+    indonesianExample: 'Janji keuntungan 50% per hari itu hanyalah skema Ponzi klasik.'
   },
   {
-    id: 'v15',
-    word: 'Romance Scam',
-    definition: 'A deceptive scheme where a scammer feigns romantic interest to gain the victim\'s affection and eventually, money.',
-    englishExample: 'After two weeks of chatting, the romance scammer asked for money for a flight.',
-    languageCue: 'asked for money for a flight',
-    indonesianMeaning: 'Skema penipuan di mana penipu memalsukan ketertarikan romantis untuk memikat kasih sayang korban dan pada akhirnya, uang mereka.',
-    indonesianExample: 'Setelah dua minggu mengobrol, penipu asmara itu meminta uang untuk tiket penerbangan.',
-    category: 'Scam Tactic'
+    id: 'is2', word: 'Guaranteed Returns', category: 'Investment Scam',
+    definition: 'A false promise that an investment has absolutely no risk of losing money.',
+    englishExample: 'They lured victims by offering guaranteed returns of 100% in a week.',
+    languageCue: 'guaranteed returns',
+    indonesianMeaning: 'Janji palsu bahwa sebuah investasi sama sekali tidak memiliki risiko kerugian.',
+    indonesianExample: 'Mereka memikat korban dengan menawarkan keuntungan pasti 100% dalam seminggu.'
   },
   {
-    id: 'v16',
-    word: 'Two-Factor Authentication (2FA)',
-    definition: 'A security process in which users provide two different authentication factors to verify themselves.',
-    englishExample: 'Always enable 2FA to protect your social media accounts from unauthorized access.',
-    languageCue: 'enable 2FA',
-    indonesianMeaning: 'Proses keamanan di mana pengguna memberikan dua faktor otentikasi yang berbeda untuk memverifikasi diri mereka sendiri.',
-    indonesianExample: 'Selalu aktifkan 2FA untuk melindungi akun media sosial Anda dari akses tidak sah.',
-    category: 'Security Concept'
+    id: 'is3', word: 'Pump and Dump', category: 'Investment Scam',
+    definition: 'Artificially inflating the price of an owned asset through false recommendations.',
+    englishExample: 'The crypto token was a pump and dump scheme promoted by fake influencers.',
+    languageCue: 'promoted by fake influencers',
+    indonesianMeaning: 'Secara artifisial melambungkan harga aset yang dimiliki melalui rekomendasi palsu.',
+    indonesianExample: 'Token kripto itu adalah skema pump and dump yang dipromosikan influencer palsu.'
   },
   {
-    id: 'v17',
-    word: 'Impersonation',
-    definition: 'The act of pretending to be another person or organization for the purpose of entertainment or fraud.',
-    englishExample: 'The hacker used impersonation to pretend to be the company CEO in an email.',
-    languageCue: 'pretend to be the company CEO',
-    indonesianMeaning: 'Tindakan berpura-pura menjadi orang atau entitas lain untuk tujuan hiburan atau penipuan.',
-    indonesianExample: 'Peretas menggunakan penyamaran untuk berpura-pura menjadi CEO perusahaan dalam sebuah email.',
-    category: 'Scam Tactic'
+    id: 'is4', word: 'Unregulated Broker', category: 'Investment Scam',
+    definition: 'A financial platform operating without a license from a recognized authority.',
+    englishExample: 'He lost his savings after trading on an unregulated broker platform.',
+    languageCue: 'unregulated broker',
+    indonesianMeaning: 'Platform keuangan yang beroperasi tanpa lisensi dari otoritas yang diakui.',
+    indonesianExample: 'Dia kehilangan tabungannya setelah berdagang di platform broker ilegal.'
   },
   {
-    id: 'v18',
-    word: 'OTP (One-Time Password)',
-    definition: 'A password that is valid for only one login session or transaction, on a computer system or other digital device.',
-    englishExample: 'Never share your OTP with anyone calling you on the phone.',
-    languageCue: 'share your OTP',
-    indonesianMeaning: 'Kata sandi yang hanya berlaku untuk satu sesi login atau transaksi, pada sistem komputer atau perangkat digital lainnya.',
-    indonesianExample: 'Jangan pernah membagikan OTP Anda kepada siapa pun yang menelepon Anda di telepon.',
-    category: 'Security Concept'
+    id: 'is5', word: 'Pig Butchering', category: 'Investment Scam',
+    definition: 'Building a long-term relationship before convincing the victim to invest in fake crypto.',
+    englishExample: 'The pig butchering scam took months of chatting before asking her to invest.',
+    languageCue: 'months of chatting',
+    indonesianMeaning: 'Membangun hubungan jangka panjang sebelum meyakinkan korban untuk berinvestasi kripto palsu.',
+    indonesianExample: 'Penipuan pig butchering memakan waktu berbulan-bulan obrolan sebelum memintanya berinvestasi.'
+  },
+
+  // --- 4. JOB SCAM ---
+  {
+    id: 'js1', word: 'Task Scam', category: 'Job Scam',
+    definition: 'A scam where victims are paid for initial simple tasks but must pay to access bigger tasks.',
+    englishExample: 'The job started by liking videos, but the task scam later required a deposit.',
+    languageCue: 'required a deposit',
+    indonesianMeaning: 'Penipuan di mana korban dibayar untuk tugas awal tapi harus membayar untuk tugas lebih besar.',
+    indonesianExample: 'Pekerjaan dimulai dengan menyukai video, tapi penipuan tugas itu lalu meminta deposit.'
   },
   {
-    id: 'v19',
-    word: 'Advance-Fee Scam',
-    definition: 'A scam where the victim is asked to pay money upfront in order to receive a larger sum later.',
-    englishExample: 'I was asked to pay a clearance fee to get the million-dollar prize.',
-    languageCue: 'pay a clearance fee',
-    indonesianMeaning: 'Penipuan di mana korban diminta membayar uang di muka untuk menerima jumlah yang lebih besar di kemudian hari.',
-    indonesianExample: 'Saya diminta membayar biaya administrasi/pencairan untuk mendapatkan hadiah jutaan dolar.',
-    category: 'Scam Tactic'
+    id: 'js2', word: 'Advance-Fee', category: 'Job Scam',
+    definition: 'Asking the victim to pay money upfront in order to secure a job or receive a larger sum.',
+    englishExample: 'They asked for an advance-fee for uniform processing before starting the job.',
+    languageCue: 'uniform processing',
+    indonesianMeaning: 'Meminta korban membayar uang di muka untuk mengamankan pekerjaan atau hadiah.',
+    indonesianExample: 'Mereka meminta biaya di muka untuk pemrosesan seragam sebelum mulai bekerja.'
   },
   {
-    id: 'v20',
-    word: 'Malicious Link',
-    definition: 'A web link designed to download malware or direct users to a compromised or fake website.',
-    englishExample: 'The email contained a malicious link disguised as a PDF invoice download.',
-    languageCue: 'disguised as a PDF invoice',
-    indonesianMeaning: 'Tautan web yang dirancang untuk mengunduh perangkat lunak berbahaya atau mengarahkan pengguna ke situs web palsu.',
-    indonesianExample: 'Email tersebut berisi tautan berbahaya yang disamarkan sebagai unduhan faktur PDF.',
-    category: 'Scam Tactic'
+    id: 'js3', word: 'Fake Recruiter', category: 'Job Scam',
+    definition: 'Someone impersonating a hiring manager from a legitimate company to steal data or money.',
+    englishExample: 'The fake recruiter contacted me on Telegram offering a remote job.',
+    languageCue: 'contacted me on Telegram',
+    indonesianMeaning: 'Seseorang yang menyamar sebagai manajer HRD perusahaan resmi untuk mencuri data/uang.',
+    indonesianExample: 'Perekrut palsu itu menghubungi saya di Telegram menawarkan pekerjaan jarak jauh.'
   },
   {
-    id: 'v21',
-    word: 'Threatening Language',
-    definition: 'Words used by scammers to intimidate victims into acting immediately out of fear.',
-    englishExample: 'The message used threatening language, saying my bank account would be permanently deleted.',
-    languageCue: 'permanently deleted',
-    indonesianMeaning: 'Kata-kata yang digunakan oleh penipu untuk mengintimidasi korban agar segera bertindak karena ketakutan.',
-    indonesianExample: 'Pesan itu menggunakan bahasa yang mengancam, mengatakan rekening bank saya akan dihapus secara permanen.',
-    category: 'Language Clue'
+    id: 'js4', word: 'Unsolicited Offer', category: 'Job Scam',
+    definition: 'A job offer sent out of nowhere without the victim ever applying.',
+    englishExample: 'I received an unsolicited offer for a high-paying job I never applied for.',
+    languageCue: 'never applied for',
+    indonesianMeaning: 'Tawaran pekerjaan yang dikirim tiba-tiba tanpa korban pernah melamarnya.',
+    indonesianExample: 'Saya menerima tawaran pekerjaan bergaji tinggi yang tidak pernah saya lamar.'
   },
   {
-    id: 'v22',
-    word: 'Too Good To Be True',
+    id: 'js5', word: 'Money Mule', category: 'Job Scam',
+    definition: 'Someone who transfers illegally acquired money on behalf of others, often unknowingly.',
+    englishExample: 'The job was just receiving funds and transferring them, making him a money mule.',
+    languageCue: 'receiving funds and transferring',
+    indonesianMeaning: 'Seseorang yang mentransfer uang ilegal atas nama orang lain, seringkali tanpa sadar.',
+    indonesianExample: 'Pekerjaannya hanya menerima dana dan mentransfernya, menjadikannya bagal uang.'
+  },
+
+  // --- 5. PRIZE SCAM ---
+  {
+    id: 'pz1', word: 'Too Good To Be True', category: 'Prize Scam',
     definition: 'Offers or claims that are so seemingly advantageous that they are almost certainly fake.',
-    englishExample: 'The free iPhone 15 offer from an unknown account was just too good to be true.',
-    languageCue: 'free iPhone 15 offer',
-    indonesianMeaning: 'Penawaran atau klaim yang tampaknya sangat menguntungkan sehingga hampir pasti merupakan palsu.',
-    indonesianExample: 'Tawaran iPhone 15 gratis dari akun tak dikenal itu terlalu bagus untuk menjadi kenyataan.',
-    category: 'Language Clue'
+    englishExample: 'Winning a free car without entering a contest is too good to be true.',
+    languageCue: 'without entering a contest',
+    indonesianMeaning: 'Penawaran atau klaim yang tampaknya sangat menguntungkan sehingga hampir pasti palsu.',
+    indonesianExample: 'Memenangkan mobil gratis tanpa mengikuti undian itu terlalu bagus untuk jadi kenyataan.'
   },
   {
-    id: 'v23',
-    word: 'Identity Theft',
-    definition: 'The fraudulent practice of using another person\'s name and personal information to obtain credit, loans, etc.',
-    englishExample: 'He became a victim of identity theft after submitting his ID card photo to a fake loan app.',
-    languageCue: 'submitting his ID card photo',
-    indonesianMeaning: 'Praktik penipuan menggunakan nama dan informasi pribadi orang lain untuk mendapatkan kredit, pinjaman, dll.',
-    indonesianExample: 'Dia menjadi korban pencurian identitas setelah mengirimkan foto KTP-nya ke aplikasi pinjaman palsu.',
-    category: 'Scam Tactic'
+    id: 'pz2', word: 'Customs Fee Scam', category: 'Prize Scam',
+    definition: 'Victims are told they won a prize but must pay a fake customs or tax fee to receive it.',
+    englishExample: 'I won a smartphone but they asked me to pay the customs fee first.',
+    languageCue: 'pay the customs fee',
+    indonesianMeaning: 'Korban diberitahu memenangkan hadiah tetapi harus membayar biaya cukai/pajak palsu.',
+    indonesianExample: 'Saya memenangkan ponsel pintar tetapi mereka meminta saya membayar biaya cukai dulu.'
   },
   {
-    id: 'v24',
-    word: 'Baiting',
-    definition: 'A scam tactic that uses a false promise to lure a victim into a trap that steals their personal information.',
-    englishExample: 'The scammer used baiting by offering free movie downloads to get my credit card details.',
-    languageCue: 'offering free movie downloads',
-    indonesianMeaning: 'Taktik penipuan yang menggunakan janji palsu untuk memancing korban ke dalam perangkap guna mencuri informasi pribadi mereka.',
-    indonesianExample: 'Penipu menggunakan umpan dengan menawarkan unduhan film gratis untuk mendapatkan detail kartu kredit saya.',
-    category: 'Scam Tactic'
+    id: 'pz3', word: 'Lottery Scam', category: 'Prize Scam',
+    definition: 'A message claiming you have won a massive lottery you never bought a ticket for.',
+    englishExample: 'The SMS claimed I won the national lottery scam of 1 billion rupiah.',
+    languageCue: 'won the national lottery',
+    indonesianMeaning: 'Pesan yang mengklaim Anda memenangkan undian besar yang tidak pernah Anda ikuti.',
+    indonesianExample: 'SMS itu mengklaim saya menang penipuan undian nasional sebesar 1 miliar rupiah.'
   },
   {
-    id: 'v25',
-    word: 'Typosquatting',
-    definition: 'Registering a domain name that is a misspelled version of a popular website to trick users into visiting it.',
-    englishExample: 'I didn\'t realize it was a typosquatting site because it looked exactly like paypal.com.',
-    languageCue: 'looked exactly like',
-    indonesianMeaning: 'Mendaftarkan nama domain yang merupakan versi salah ketik dari situs web populer untuk menipu pengguna agar mengunjunginya.',
-    indonesianExample: 'Saya tidak menyadari itu situs typosquatting karena tampilannya terlihat persis seperti paypal.com.',
-    category: 'Scam Tactic'
+    id: 'pz4', word: 'Claim Deadline', category: 'Prize Scam',
+    definition: 'Creating artificial urgency by saying a prize will expire if not claimed immediately.',
+    englishExample: 'The email stated I had a 2-hour claim deadline to receive the prize.',
+    languageCue: '2-hour claim deadline',
+    indonesianMeaning: 'Menciptakan urgensi buatan dengan mengatakan hadiah akan hangus jika tidak segera diklaim.',
+    indonesianExample: 'Email itu menyatakan saya punya batas waktu klaim 2 jam untuk menerima hadiah.'
+  },
+  {
+    id: 'pz5', word: 'Overpayment Scam', category: 'Prize Scam',
+    definition: 'Sending a fake check for a prize/item, overpaying, and asking for the difference back.',
+    englishExample: 'They sent a fake check for the prize and asked me to return the overpayment.',
+    languageCue: 'return the overpayment',
+    indonesianMeaning: 'Mengirim cek palsu berlebih, lalu meminta korban mengembalikan selisihnya.',
+    indonesianExample: 'Mereka mengirim cek palsu untuk hadiah dan meminta saya mengembalikan kelebihannya.'
+  },
+
+  // --- 6. TECH SUPPORT SCAM ---
+  {
+    id: 'ts1', word: 'Pop-up Warning', category: 'Tech Support Scam',
+    definition: 'A fake alert on a browser claiming the computer is infected with viruses.',
+    englishExample: 'A loud pop-up warning suddenly appeared, telling me to call Microsoft.',
+    languageCue: 'call Microsoft',
+    indonesianMeaning: 'Peringatan palsu di browser yang mengklaim komputer terinfeksi virus.',
+    indonesianExample: 'Peringatan pop-up yang bising tiba-tiba muncul, menyuruh saya menelepon Microsoft.'
+  },
+  {
+    id: 'ts2', word: 'Remote Access', category: 'Tech Support Scam',
+    definition: 'Allowing a third party to control your computer over the internet.',
+    englishExample: 'The fake technician asked for remote access to fix the non-existent virus.',
+    languageCue: 'asked for remote access',
+    indonesianMeaning: 'Mengizinkan pihak ketiga untuk mengontrol komputer Anda melalui internet.',
+    indonesianExample: 'Teknisi palsu itu meminta akses jarak jauh untuk memperbaiki virus yang tidak ada.'
+  },
+  {
+    id: 'ts3', word: 'Gift Card Payment', category: 'Tech Support Scam',
+    definition: 'Scammers requesting payment for services using untraceable gift cards (like Google Play).',
+    englishExample: 'The tech support said I must pay for the antivirus using a gift card payment.',
+    languageCue: 'using a gift card',
+    indonesianMeaning: 'Penipu meminta pembayaran layanan menggunakan kartu hadiah yang tidak dapat dilacak.',
+    indonesianExample: 'Dukungan teknis mengatakan saya harus membayar antivirus menggunakan kartu hadiah.'
+  },
+  {
+    id: 'ts4', word: 'Scareware', category: 'Tech Support Scam',
+    definition: 'Malicious software that tricks users into believing their computer is infected.',
+    englishExample: 'The scareware locked my browser and demanded I buy their fake security tool.',
+    languageCue: 'demanded I buy',
+    indonesianMeaning: 'Perangkat lunak jahat yang menipu pengguna agar percaya komputer mereka terinfeksi.',
+    indonesianExample: 'Scareware itu mengunci browser saya dan menuntut saya membeli alat keamanan palsu.'
+  },
+  {
+    id: 'ts5', word: 'Event Viewer Trick', category: 'Tech Support Scam',
+    definition: 'Scammers showing normal system logs to convince victims their PC has critical errors.',
+    englishExample: 'He used the event viewer trick to show me harmless errors and cause panic.',
+    languageCue: 'show me harmless errors',
+    indonesianMeaning: 'Penipu menunjukkan log sistem normal untuk meyakinkan korban komputernya rusak.',
+    indonesianExample: 'Dia menggunakan trik event viewer untuk menunjukkan error biasa dan membuat panik.'
+  },
+
+  // --- 7. GOVERNMENT IMPERSONATION ---
+  {
+    id: 'gi1', word: 'Tax Refund Scam', category: 'Government Impersonation',
+    definition: 'A fake notification claiming the victim is owed money by the tax department.',
+    englishExample: 'The email claimed I was eligible for a tax refund if I clicked the link.',
+    languageCue: 'eligible for a tax refund',
+    indonesianMeaning: 'Pemberitahuan palsu yang mengklaim korban berhak atas uang dari departemen pajak.',
+    indonesianExample: 'Email itu mengklaim saya berhak atas pengembalian pajak jika mengklik tautan.'
+  },
+  {
+    id: 'gi2', word: 'Arrest Warrant', category: 'Government Impersonation',
+    definition: 'A scam call threatening the victim with immediate arrest for unpaid fines.',
+    englishExample: 'The fake police officer threatened me with an arrest warrant over the phone.',
+    languageCue: 'threatened me with an arrest',
+    indonesianMeaning: 'Panggilan penipuan yang mengancam korban dengan penangkapan segera karena denda.',
+    indonesianExample: 'Polisi palsu itu mengancam saya dengan surat perintah penangkapan melalui telepon.'
+  },
+  {
+    id: 'gi3', word: 'Fake Official', category: 'Government Impersonation',
+    definition: 'A scammer pretending to be a representative from a government agency.',
+    englishExample: 'The fake official demanded my ID number to verify my citizenship status.',
+    languageCue: 'demanded my ID number',
+    indonesianMeaning: 'Penipu yang berpura-pura menjadi perwakilan dari instansi pemerintah.',
+    indonesianExample: 'Pejabat palsu itu meminta nomor KTP untuk memverifikasi status kewarganegaraan saya.'
+  },
+  {
+    id: 'gi4', word: 'Wire Transfer Demand', category: 'Government Impersonation',
+    definition: 'Urging victims to wire money immediately to a "safe account" managed by the state.',
+    englishExample: 'They issued a wire transfer demand to secure my money from money launderers.',
+    languageCue: 'wire transfer demand',
+    indonesianMeaning: 'Mendesak korban segera mengirim uang ke "rekening aman" yang dikelola negara.',
+    indonesianExample: 'Mereka mengeluarkan tuntutan transfer kawat untuk mengamankan uang saya dari pencucian uang.'
+  },
+  {
+    id: 'gi5', word: 'Subpoena Threat', category: 'Government Impersonation',
+    definition: 'A fake legal document sent via email to scare someone into paying a penalty.',
+    englishExample: 'I received a subpoena threat via WhatsApp from someone claiming to be a judge.',
+    languageCue: 'subpoena threat via WhatsApp',
+    indonesianMeaning: 'Dokumen hukum palsu yang dikirim via email untuk menakuti korban agar membayar denda.',
+    indonesianExample: 'Saya menerima ancaman panggilan pengadilan via WhatsApp dari orang yang mengaku hakim.'
   }
 ];
