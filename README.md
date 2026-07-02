@@ -172,3 +172,28 @@ Dokumen ini mencatat seluruh penambahan arsitektur sistem, peningkatan pengalama
 6. `src/components/ui/CertificateModal.tsx` — Pembuatan cetakan komponen HTML sertifikat kelulusan formal portofolio siswa.
 7. `src/index.css` — Penyuntikan aturan `@media print` untuk isolasi ekspor dokumen PDF landscape.
 8. `src/data/quizData.ts` — Pendaftaran properti opsional `category` pada struktur model data kuis TypeScript.
+
+## 🚀 Pembaruan Inovasi Teknologi Pendidikan (LIDM Berorientasi)
+
+Untuk memperkuat bobot akademis dan pedagogis platform dalam ajang LIDM 2026, sistem COPET telah diupgrade secara radikal dengan mengintegrasikan kerangka gaya belajar **VARK Model (Visual, Auditory, Read/Write, Kinesthetic)** serta arsitektur evaluasi mandiri yang canggih:
+
+### 1. AI-Driven Psychological Trick Profiler (Analisis Pola Kerentanan)
+* **Teknologi:** Sistem diagnostik kognitif yang merekam setiap kegagalan siswa berdasarkan kategori manipulasi siber (*Phishing, Romance Scam, Investment Scam, Job Scam, Prize Scam, Tech Support Scam, Government Impersonation*).
+* **Dampak Pedagogis:** Di akhir sesi kuis, platform tidak sekadar menampilkan angka skor, melainkan melakukan kalkulasi otomatis untuk menerbitkan **"Cyber Security Risk Profile"** personal (Contoh: *Status: Vulnerable to Authority-based attacks*). Ini mempermudah siswa mengenali titik lemah psikologis mereka terhadap rekayasa sosial (*social engineering*).
+
+### 2. Interactive Linguistic Heatmap Toggle (Analisis Forensik Bahasa)
+* **Teknologi:** Fitur pemindai teks interaktif yang disuntikkan ke dalam modul *Vocab Drill*.
+* **Dampak Pedagogis:** Siswa dapat mengaktifkan tombol **"Linguistic Heatmap"** untuk membedah anatomi penipuan teks berbahasa Inggris. Kata-kata yang mengandung unsur tipu daya (*Language Key Cues* seperti frasa urgensi palsu atau peniruan otoritas resmi) akan berkedip (*pulse*) dan memancarkan efek *neon glow* merah-oranye guna memfokuskan memori visual siswa pada pola manipulasi bahasa kedua (L2).
+
+### 3. Real-Time Stress & Impulse Emulator (Simulator Tekanan Psikologis)
+* **Teknologi:** Sistem *Stress Emulator* dinamis menggunakan library animasi `framer-motion` dan manipulasi DOM CSS.
+* **Dampak Pedagogis:** Ketika *timer* kritis kuis menyentuh angka $\le$ 5 detik, antarmuka aplikasi secara otomatis memicu **"Cyber Breach Alert Mode"**. Layar aplikasi akan bergetar (*screen shake effect*) secara intens dengan indikator bar berwarna merah darah. Fitur ini sengaja dirancang untuk melatih ketenangan kognitif (*impulse control*) siswa dalam mendeteksi penipuan siber di bawah tekanan waktu ekstrem dunia nyata.
+
+### 4. Multisensory Auditory Feedback & Text-to-Speech (TTS)
+* **Teknologi:** Integrasi **Web Speech API** bawaan peramban untuk modul *Vocab Drill* dan **Web Audio API Synthesizer** frekuensi gelombang (*sine & sawtooth wave*) pada modul *Scam Quiz*.
+* **Dampak Pedagogis:** * **Auditori:** Siswa dengan gaya belajar pendengaran dapat mengklik ikon *speaker* untuk mendengarkan pelafalan register formal autentik dalam bahasa Inggris yang kerap disalahgunakan penipu transaksional global.
+    * **SFX Feedback:** Memberikan umpan balik instan berupa bunyi *cybernetic beep* bernada tinggi untuk respon benar, dan alarm kegagalan sistem bernada rendah untuk respon salah guna menguatkan retensi memori audio.
+
+### 5. Multi-Tenant Sandbox Evaluation System (LMS Mikro Pengajar)
+* **Teknologi:** Modul kendali gerbang masuk (*Login view*) yang terintegrasi dengan klaster pencatatan terpusat pada *Admin Panel* (`AdminView.tsx`).
+* **Dampak Pedagogis:** Mengakomodasi kebutuhan eksperimental penelitian kelas (metode *one-group pretest-posttest design*). Siswa dapat memilih sesi **Pre-Test** atau **Post-Test** sebelum bermain, lalu Guru/Pengajar dapat memantau grafik kenaikan tingkat literasi siber siswa secara langsung dan terpisah melalui dasbor admin untuk menguji efektivitas pedagogis platform secara empiris.
