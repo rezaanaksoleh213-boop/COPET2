@@ -10,338 +10,351 @@ export interface QuizQuestion {
   correctAnswerIndex: number;
   explanationEn: string;
   explanationId: string;
-  category?: string;
+  category: 'Phishing' | 'Romance Scam' | 'Investment Scam' | 'Job Scam' | 'Prize Scam' | 'Tech Support Scam' | 'Government Impersonation';
 }
 
 export const quizData: QuizQuestion[] = [
+  // --- 1. PHISHING ---
   {
     id: 'q1',
     difficulty: 'Easy',
-    scenarioEn: 'You receive an SMS: "Congratulations! Your number has won Rp100 Million from Shopee. Click the following link to claim: http://shopee-hadiah-resmi.com". What do you do?',
-    scenarioId: 'Anda menerima SMS: "Selamat! Nomor Anda memenangkan Rp100 Juta dari Shopee. Klik link berikut untuk klaim: http://shopee-hadiah-resmi.com". Apa yang Anda lakukan?',
+    scenarioEn: 'You receive an SMS: "Congratulations! Your account has been selected for a free reward. Click the link to secure your data: http://shopee-hadiah-resmi.com". What do you do?',
+    scenarioId: 'Anda menerima SMS: "Selamat! Akun Anda terpilih untuk hadiah gratis. Klik link untuk mengamankan data Anda: http://shopee-hadiah-resmi.com". Apa yang Anda lakukan?',
     optionsEn: [
-      'Click the link because I frequently shop at Shopee.',
-      'Ignore and block the number because it is a scam.',
+      'Click the link because I frequently shop online.',
+      'Ignore and block the number because it is a phishing link.',
       'Reply to the SMS to ask if it is true.',
-      'Share it with the family group so they can be happy too.'
+      'Forward it to all friends.'
     ],
     optionsId: [
-      'Klik link tersebut karena saya memang sering belanja di Shopee.',
-      'Abaikan dan blokir nomor tersebut karena itu penipuan.',
+      'Klik link tersebut karena saya memang sering belanja online.',
+      'Abaikan dan blokir nomor tersebut karena itu link phishing.',
       'Balas SMS untuk menanyakan kebenarannya.',
-      'Sebarkan ke grup keluarga biar mereka ikutan senang.'
+      'Teruskan ke semua teman.'
     ],
     correctAnswerIndex: 1,
-    explanationEn: 'Scammers often use the lure of large prizes with fake links (phishing) to steal your data.',
-    explanationId: 'Scammer sering menggunakan iming-iming hadiah besar dengan link palsu (phishing) untuk mencuri data Anda.',
-    category: 'Greed / Iming-iming'
+    explanationEn: 'Scammers use fake look-alike links (phishing) disguised as well-known brands to harvest credentials.',
+    explanationId: 'Penipu menggunakan link palsu yang mirip (phishing) berkedok merek terkenal untuk mencuri kredensial.',
+    category: 'Phishing'
   },
   {
     id: 'q2',
-    difficulty: 'Medium',
-    scenarioEn: 'Someone calls claiming to be from Bank BCA, stating there are suspicious transactions on your account and asks for the OTP code just sent via SMS to block it.',
-    scenarioId: 'Seseorang menelpon mengaku dari Bank BCA, mengatakan ada transaksi mencurigakan di rekening Anda dan meminta kode OTP yang baru saja dikirim via SMS untuk memblokirnya.',
-    optionsEn: [
-      'Give the OTP because they are an official bank employee trying to help.',
-      'Hang up and immediately contact HaloBCA from the official number.',
-      'Give half of the OTP code to test them.',
-      'Get angry at the caller.'
-    ],
-    optionsId: [
-      'Berikan OTP tersebut karena dia orang bank resmi yang mau membantu.',
-      'Tutup telepon dan segera hubungi HaloBCA dari nomor resmi.',
-      'Berikan setengah dari kode OTP untuk mengetes.',
-      'Marah-marah kepada penelepon.'
-    ],
-    correctAnswerIndex: 1,
-    explanationEn: 'Real bank officials NEVER ask for your OTP code, PIN, or Password for any reason.',
-    explanationId: 'Pihak bank asli TIDAK PERNAH meminta kode OTP, PIN, atau Password Anda dengan alasan apapun.',
-    category: 'Authority / Otoritas Palsu'
-  },
-  {
-    id: 'q3',
     difficulty: 'Hard',
-    scenarioEn: 'You receive an email from "HRD Company X" (your target company) with a PDF attachment named "Form_Interview.exe".',
-    scenarioId: 'Anda mendapat email dari "HRD Perusahaan X" (perusahaan incaran Anda) dengan lampiran PDF bernama "Form_Interview.exe".',
+    scenarioEn: 'An email from "IT Department" states your institutional mailbox is full. It provides a login update link: "http://unsyiah-webmail-update.weebly.com" to upgrade storage.',
+    scenarioId: 'Email dari "Departemen IT" menyatakan kotak surat institusi Anda penuh. Menyediakan tautan pembaruan login: "http://unsyiah-webmail-update.weebly.com" untuk menambah penyimpanan.',
     optionsEn: [
-      'Immediately open the attachment so you do not miss the interview schedule.',
-      'Forward the email to a friend to have it checked.',
-      'Be suspicious because a PDF file cannot have a .exe extension, and delete it.',
-      'Reply to the email and ask for a different file format.'
+      'Click the link and log in so you do not lose your files.',
+      'Reply to the email with your password to let them fix it.',
+      'Ignore it because official domains do not use free hosting subdomains like Weebly.',
+      'Forward it to all classmates.'
     ],
     optionsId: [
-      'Segera buka lampiran tersebut agar tidak ketinggalan jadwal interview.',
-      'Forward email tersebut ke teman untuk dicek.',
-      'Curiga karena file PDF tidak mungkin berekstensi .exe, lalu menghapusnya.',
-      'Balas email tersebut dan minta format file lain.'
+      'Klik tautan dan masuk agar tugas-tugas Anda tidak hilang.',
+      'Balas email beserta kata sandi agar mereka bisa memperbaikinya.',
+      'Abaikan karena domain resmi tidak menggunakan subdomain hosting gratis seperti Weebly.',
+      'Teruskan ke semua teman sekelas.'
     ],
     correctAnswerIndex: 2,
-    explanationEn: 'Files with a .exe extension disguised as documents are usually Malware/Trojans ready to infect your device.',
-    explanationId: 'File berekstensi .exe yang disamarkan sebagai dokumen biasanya adalah Malware/Trojan yang siap menginfeksi perangkat Anda.',
-    category: 'Urgency / Desakan Waktu'
+    explanationEn: 'Phishers use generic platforms to host fake credential harvesters. Real campuses use their official domains.',
+    explanationId: 'Pelaku phishing menggunakan platform gratis untuk membuat halaman login palsu. Kampus asli menggunakan domain resmi.',
+    category: 'Phishing'
+  },
+
+  // --- 2. ROMANCE SCAM ---
+  {
+    id: 'q3',
+    difficulty: 'Medium',
+    scenarioEn: 'Someone you met on a dating app a week ago suddenly showers you with declarations of love and asks for money to buy an urgent plane ticket to visit you.',
+    scenarioId: 'Seseorang yang Anda kenal di aplikasi kencan seminggu yang lalu tiba-tiba menghujani Anda dengan pernyataan cinta dan meminta uang untuk membeli tiket pesawat darurat.',
+    optionsEn: [
+      'Send the money because you are deeply touched by their affection.',
+      'Offer to buy the ticket yourself directly from the airline.',
+      'Refuse, block the contact, and report the profile for a romance scam.',
+      'Ask them to borrow money from their family first.'
+    ],
+    optionsId: [
+      'Kirim uangnya karena Anda sangat tersentuh dengan kasih sayangnya.',
+      'Tawarkan untuk membelikan tiket sendiri langsung dari maskapai.',
+      'Tolak, blokir kontak, dan laporkan profil atas penipuan asmara.',
+      'Minta mereka untuk meminjam uang dari keluarganya terlebih dahulu.'
+    ],
+    correctAnswerIndex: 2,
+    explanationEn: 'Romance scammers deploy love bombing to break down logical resistance before manufacturing a fake emergency.',
+    explanationId: 'Penipu asmara menggunakan love bombing untuk melumpuhkan logika korban sebelum membuat keadaan darurat palsu.',
+    category: 'Romance Scam'
   },
   {
     id: 'q4',
     difficulty: 'Expert',
-    scenarioEn: 'Your friend chats you on WhatsApp using a new number. Their writing style is very similar. They urgently ask to borrow money and provide a bank account under someone else\'s name.',
-    scenarioId: 'Teman Anda menge-chat di WhatsApp menggunakan nomor barunya. Gaya bahasanya sangat mirip. Ia meminta pinjaman uang mendesak dan memberikan nomor rekening bernama orang lain.',
+    scenarioEn: 'An attractive internet friend requests intimate photos from you, and later threatens to leak them to your family unless you wire a specific amount of cash.',
+    scenarioId: 'Teman internet yang menarik meminta foto intim dari Anda, dan kemudian mengancam akan menyebarkannya ke keluarga Anda kecuali Anda mengirimkan sejumlah uang.',
     optionsEn: [
-      'Transfer immediately out of pity since the writing style is so similar.',
-      'Call them on their old or new number, ask for a video call to confirm.',
-      'Ignore it because you do not have money right now.',
-      'Transfer a small amount just in case.'
+      'Pay them immediately so your family never finds out.',
+      'Argue with them to convince them to stop.',
+      'Never pay; preserve the evidence, block them, and contact cyber police authorities.',
+      'Deactivate all your accounts and ignore it.'
     ],
     optionsId: [
-      'Langsung transfer karena kasihan dan gaya bahasanya sangat mirip.',
-      'Telepon dia ke nomor lama atau nomor baru tersebut, suruh dia video call untuk konfirmasi.',
-      'Abaikan saja karena Anda sedang tidak punya uang.',
-      'Transfer sebagian kecil saja untuk berjaga-jaga.'
+      'Bayar segera agar keluarga Anda tidak pernah tahu.',
+      'Berdebat dengan mereka untuk meyakinkan mereka agar berhenti.',
+      'Jangan pernah bayar; amankan bukti obrolan, blokir, dan hubungi pihak polisi siber.',
+      'Nonaktifkan semua akun Anda dan abaikan saja.'
     ],
-    correctAnswerIndex: 1,
-    explanationEn: 'Social Engineering and Account Takeover techniques can mimic writing styles. Always verify via voice or video before transferring money to an unknown account.',
-    explanationId: 'Teknik Social Engineering dan Account Takeover bisa meniru gaya bahasa. Selalu verifikasi via suara atau video sebelum mentransfer uang ke rekening tak dikenal.',
-    category: 'Emotion / Manipulasi Emosi'
+    correctAnswerIndex: 2,
+    explanationEn: 'This is sextortion. Paying extortionists never guarantees safety; it only invites more aggressive financial demands.',
+    explanationId: 'Ini adalah sekstorsi. Membayar pemeras tidak menjamin keamanan; itu hanya memicu tuntutan finansial yang lebih besar.',
+    category: 'Romance Scam'
   },
+
+  // --- 3. INVESTMENT SCAM ---
   {
     id: 'q5',
     difficulty: 'Medium',
-    scenarioEn: 'You are added to a Telegram group promising 500% daily returns on crypto investments by transferring funds to an "admin" account.',
-    scenarioId: 'Anda dimasukkan ke grup Telegram yang menjanjikan keuntungan kripto 500% per hari dengan mentransfer dana ke rekening "admin".',
+    scenarioEn: 'You are added to a Telegram channel promising 500% daily guaranteed returns on automated crypto trading by converting cash into their system ledger.',
+    scenarioId: 'Anda dimasukkan ke grup Telegram yang menjanjikan keuntungan pasti 500% per hari dari perdagangan kripto dengan mengubah uang tunai ke sistem mereka.',
     optionsEn: [
-      'Invest a small amount to see if it works.',
-      'Ask the group members for proof of their profits.',
-      'Report the group for spam and leave immediately.',
-      'Wait and observe the group for a few days.'
+      'Invest a tiny amount to see if the ledger operates correctly.',
+      'Ask other members in the channel to verify their screenshots.',
+      'Report the channel for malicious fraud and exit immediately.',
+      'Observe the trades for a few days.'
     ],
     optionsId: [
-      'Investasikan nominal kecil untuk melihat apakah itu berhasil.',
-      'Tanya anggota grup tentang bukti keuntungan mereka.',
-      'Laporkan grup tersebut sebagai spam dan segera keluar.',
-      'Tunggu dan amati grup tersebut selama beberapa hari.'
+      'Investasikan nominal kecil untuk melihat apakah sistem beroperasi dengan benar.',
+      'Tanya anggota lain di grup untuk memverifikasi tangkapan layar mereka.',
+      'Laporkan grup atas penipuan berbahaya dan segera keluar.',
+      'Amati perdagangan selama beberapa hari.'
     ],
     correctAnswerIndex: 2,
-    explanationEn: 'Unrealistic guaranteed returns are classic signs of a Ponzi scheme or investment scam. Testimonials are often fake accounts.',
-    explanationId: 'Keuntungan pasti yang tidak masuk akal adalah tanda klasik skema Ponzi atau penipuan investasi. Testimoni seringkali berasal dari akun palsu.',
-    category: 'Greed / Iming-iming'
+    explanationEn: 'Guaranteed massive returns with zero risk are foundational characteristics of financial Ponzi schemes.',
+    explanationId: 'Keuntungan besar yang dijamin pasti tanpa risiko adalah karakteristik mendasar dari skema Ponzi.',
+    category: 'Investment Scam'
   },
   {
     id: 'q6',
     difficulty: 'Hard',
-    scenarioEn: 'You receive an automated call from someone claiming to be the Police, stating your identity was used for money laundering and offering to "secure" your funds.',
-    scenarioId: 'Anda menerima telepon otomatis dari seseorang yang mengaku Polisi, menyatakan identitas Anda digunakan untuk pencucian uang dan menawarkan bantuan untuk "mengamankan" dana Anda.',
+    scenarioEn: 'A verified social media page claims a new token is backed by billionaires and urges everyone to buy before the price skyrockets in the next hour.',
+    scenarioId: 'Halaman media sosial terverifikasi mengklaim token baru didukung oleh miliarder dan mendesak semua orang untuk membeli sebelum harganya melonjak dalam satu jam ke depan.',
     optionsEn: [
-      'Follow their instructions to transfer your money to their "safe account".',
-      'Argue with them to prove your innocence.',
-      'Hang up immediately; authorities do not ask to move your funds over a phone call.',
-      'Provide your ID details so they can verify you are not the suspect.'
+      'Buy immediately to ensure you do not miss the profit wave.',
+      'Research the whitepaper on official regulatory sites to spot pump-and-dump signs.',
+      'Message the admin to ask for premium investment tips.',
+      'Share the post with family.'
     ],
     optionsId: [
-      'Ikuti instruksi mereka untuk mentransfer uang ke "rekening aman" mereka.',
-      'Berdiam argumen untuk membuktikan Anda tidak bersalah.',
-      'Tutup telepon segera; otoritas resmi tidak akan meminta memindahkan dana via telepon.',
-      'Berikan detail KTP agar mereka bisa memverifikasi Anda bukan tersangka.'
+      'Beli segera agar tidak ketinggalan gelombang keuntungan.',
+      'Riset berkas whitepaper di situs regulasi resmi untuk mencari tanda pump-and-dump.',
+      'Kirim pesan ke admin untuk meminta tips investasi premium.',
+      'Bagikan postingan tersebut ke keluarga.'
     ],
-    correctAnswerIndex: 2,
-    explanationEn: 'Scammers impersonate law enforcement to induce panic. Real police will never ask you to transfer money to a "safe account".',
-    explanationId: 'Penipu menyamar sebagai penegak hukum untuk memicu kepanikan. Polisi asli tidak akan pernah meminta Anda mentransfer uang ke "rekening aman".',
-    category: 'Authority / Otoritas Palsu'
+    correctAnswerIndex: 1,
+    explanationEn: 'Scammers execute pump-and-dump schemes by generating artificial hype, then selling off assets when victims inflate the price.',
+    explanationId: 'Penipu menjalankan skema pump-and-dump dengan membuat sensasi palsu, lalu menjual aset mereka saat korban melambungkan harganya.',
+    category: 'Investment Scam'
   },
+
+  // --- 4. JOB SCAM ---
   {
     id: 'q7',
     difficulty: 'Easy',
-    scenarioEn: 'A courier sends a WhatsApp message: "Please check the photo of your package" along with a file named "LIHAT_FOTO_PAKET.APK".',
-    scenarioId: 'Seorang kurir mengirim pesan WhatsApp: "Tolong cek foto paket Anda" disertai dengan file bernama "LIHAT_FOTO_PAKET.APK".',
+    scenarioEn: 'An influencer ad offers $500 a day for simply liking online video tasks. However, you must pay a $50 administrative activation deposit first.',
+    scenarioId: 'Iklan influencer menawarkan $500 sehari hanya untuk menyukai tugas video online. Namun, Anda harus membayar deposit aktivasi administrasi $50 terlebih dahulu.',
     optionsEn: [
-      'Download and install the APK to see the package photo.',
-      'Ignore the file, delete the chat, and block the sender.',
-      'Ask the courier to send it via email instead.',
-      'Open the file quickly and uninstall it right after.'
+      'Pay the $50 because the daily salary will return it quickly.',
+      'Ignore it; legitimate jobs never require upfront employee deposits.',
+      'Ask if you can pay the activation fee out of your first paycheck.',
+      'Invite friends to join to get a referral fee.'
     ],
     optionsId: [
-      'Unduh dan instal APK untuk melihat foto paket.',
-      'Abaikan file tersebut, hapus obrolan, dan blokir pengirim.',
-      'Minta kurir untuk mengirimkannya melalui email saja.',
-      'Buka file tersebut dengan cepat dan langsung copot pemasangannya.'
+      'Bayar $50 karena gaji harian akan mengembalikannya dengan cepat.',
+      'Abaikan; pekerjaan yang sah tidak pernah meminta deposit karyawan di muka.',
+      'Tanya apakah Anda bisa membayar biaya aktivasi dari gaji pertama Anda.',
+      'Ajak teman bergabung untuk mendapatkan komisi bonus.'
     ],
     correctAnswerIndex: 1,
-    explanationEn: 'APK files are Android applications, not photos. Installing them allows scammers to steal SMS OTPs and empty your bank account.',
-    explanationId: 'File APK adalah aplikasi Android, bukan foto. Menginstalnya memungkinkan penipu mencuri SMS OTP dan menguras rekening bank Anda.',
-    category: 'Urgency / Desakan Waktu'
+    explanationEn: 'Advance-fee task scams trick job seekers into paying setup costs for non-existent virtual employment rewards.',
+    explanationId: 'Penipuan lowongan kerja berkedok tugas meminta korban membayar biaya di muka untuk pekerjaan fiktif.',
+    category: 'Job Scam'
   },
   {
     id: 'q8',
-    difficulty: 'Medium',
-    scenarioEn: 'Someone you met on a dating app a month ago suddenly asks for money to buy a flight ticket to visit you.',
-    scenarioId: 'Seseorang yang Anda kenal di aplikasi kencan sebulan yang lalu tiba-tiba meminta uang untuk membeli tiket pesawat agar bisa mengunjungi Anda.',
-    optionsEn: [
-      'Send the money because you really want to meet them.',
-      'Offer to buy the ticket yourself directly from the airline.',
-      'Refuse, block the contact, and report their profile for romance scamming.',
-      'Ask them to borrow money from their family first.'
-    ],
-    optionsId: [
-      'Kirim uangnya karena Anda sangat ingin bertemu dengannya.',
-      'Tawarkan untuk membelikan tiket sendiri langsung dari maskapai.',
-      'Tolak, blokir kontak, dan laporkan profil mereka atas penipuan asmara.',
-      'Minta mereka untuk meminjam uang dari keluarganya terlebih dahulu.'
-    ],
-    correctAnswerIndex: 2,
-    explanationEn: 'Romance scammers build emotional connections before creating fake emergencies to ask for money. Never send money to someone you have not met in person.',
-    explanationId: 'Pelaku romance scam membangun ikatan emosional sebelum membuat keadaan darurat palsu untuk meminta uang. Jangan pernah kirim uang ke orang yang belum pernah ditemui langsung.',
-    category: 'Emotion / Manipulasi Emosi'
-  },
-  {
-    id: 'q9',
     difficulty: 'Hard',
-    scenarioEn: 'You get an email from "Tax_Office_Support@gmail.com" threatening to freeze your assets if you do not pay a penalty via a provided crypto wallet.',
-    scenarioId: 'Anda mendapat email dari "Tax_Office_Support@gmail.com" yang mengancam akan membekukan aset Anda jika tidak membayar denda melalui dompet kripto yang disediakan.',
+    scenarioEn: 'A remote company recruiter on Telegram hires you instantly without an interview and asks you to receive company funds into your personal bank account and wire it to their vendor.',
+    scenarioId: 'Perekrut perusahaan jarak jauh di Telegram mempekerjakan Anda secara instan tanpa wawancara dan meminta Anda menerima dana perusahaan ke rekening pribadi lalu mentransfernya ke vendor mereka.',
     optionsEn: [
-      'Pay immediately to avoid having your assets frozen.',
-      'Check the sender\'s email domain; official government emails do not use @gmail.com.',
-      'Reply with a screenshot of your tax returns to prove you paid.',
-      'Forward the email to your accountant to handle the payment.'
+      'Process the transfer to demonstrate your excellent performance.',
+      'Refuse and report; they are using you as an unwitting Money Mule to launder stolen money.',
+      'Keep a small fee for yourself as a commission.',
+      'Ask for official employment contracts first.'
     ],
     optionsId: [
-      'Bayar segera untuk menghindari pembekuan aset Anda.',
-      'Periksa domain email pengirim; email resmi pemerintah tidak menggunakan @gmail.com.',
-      'Balas dengan tangkapan layar SPT Anda untuk membuktikan Anda sudah membayar.',
-      'Teruskan email ke akuntan Anda untuk mengurus pembayarannya.'
+      'Proses transfer untuk menunjukkan kinerja Anda yang luar biasa.',
+      'Tolak dan laporkan; mereka memanfaatkan Anda sebagai Money Mule untuk mencuci uang curian.',
+      'Simpan sebagian kecil dana sebagai komisi kerja Anda.',
+      'Minta kontrak kerja resmi terlebih dahulu.'
     ],
     correctAnswerIndex: 1,
-    explanationEn: 'Official government institutions use specific domains (e.g., .go.id or .gov) and never request payments via cryptocurrency.',
-    explanationId: 'Institusi pemerintah resmi menggunakan domain spesifik (misal, .go.id) dan tidak pernah meminta pembayaran melalui mata uang kripto.',
-    category: 'Authority / Otoritas Palsu'
+    explanationEn: 'Scammers recruit money mules to move illegal funds, shifting the legal liability and criminal tracks onto the victim account.',
+    explanationId: 'Penipu merekrut money mule untuk memindahkan dana ilegal, memindahkan tanggung jawab pidana ke rekening korban.',
+    category: 'Job Scam'
+  },
+
+  // --- 5. PRIZE SCAM ---
+  {
+    id: 'q9',
+    difficulty: 'Easy',
+    scenarioEn: 'You win a brand new car from a national lucky draw contest that you never entered. The agent states you must wire a 1% customs clearance fee to claim it.',
+    scenarioId: 'Anda memenangkan mobil baru dari undian nasional yang tidak pernah Anda ikuti. Agen menyatakan Anda harus mentransfer biaya bea cukai 1% untuk mengklaimnya.',
+    optionsEn: [
+      'Pay the fee immediately since 1% is tiny compared to a car.',
+      'Recognize the advance-fee prize scam pattern and block the contact.',
+      'Negotiate to subtract the 1% fee from the car value.',
+      'Call relatives to borrow the registration cash.'
+    ],
+    optionsId: [
+      'Bayar biaya segera karena 1% sangat kecil dibanding nilai sebuah mobil.',
+      'Kenali pola penipuan hadiah dengan biaya di muka ini lalu blokir nomornya.',
+      'Negosiasi agar biaya 1% tersebut dipotong dari nilai mobil saja.',
+      'Telepon kerabat untuk meminjam uang pendaftaran tersebut.'
+    ],
+    correctAnswerIndex: 1,
+    explanationEn: 'If an award requires upfront cash deposits under the guise of taxes or clearance fees, it is a guaranteed fraud scheme.',
+    explanationId: 'Jika hadiah mewajibkan deposit tunai di muka dengan dalih pajak atau biaya administrasi, itu dipastikan penipuan.',
+    category: 'Prize Scam'
   },
   {
     id: 'q10',
-    difficulty: 'Easy',
-    scenarioEn: 'An ad on social media offers $500 a day for watching videos. You just need to pay a $50 "registration fee" first.',
-    scenarioId: 'Sebuah iklan di media sosial menawarkan bayaran $500 sehari untuk menonton video. Anda hanya perlu membayar "biaya pendaftaran" sebesar $50 terlebih dahulu.',
+    difficulty: 'Medium',
+    scenarioEn: 'An email states you won a $10,000 corporate giveaway, but warns you have a strict 2-hour claim deadline before the prize is reassigned.',
+    scenarioId: 'Sebuah email menyatakan Anda memenangkan giveaway $10.000, tetapi memperingatkan adanya batas waktu klaim 2 jam sebelum hadiah dialihkan.',
     optionsEn: [
-      'Pay the $50 because you will make it back easily.',
-      'Share the ad with friends so you can all make money.',
-      'Recognize it as an advance-fee scam and report the ad.',
-      'Ask the advertiser if you can pay the fee from your first paycheck.'
+      'Hurry up and fill in your credit card details immediately.',
+      'Ignore the artificial urgency designed to bypass critical thinking.',
+      'Forward the coupon to friends to check its legitimacy.',
+      'Reply asking for a deadline extension.'
     ],
     optionsId: [
-      'Bayar $50 karena modalnya akan cepat kembali.',
-      'Bagikan iklan ke teman-teman agar kalian semua bisa menghasilkan uang.',
-      'Sadar bahwa itu adalah penipuan berkedok biaya di muka dan laporkan iklannya.',
-      'Tanya pemasang iklan apakah Anda bisa membayar biaya dari gaji pertama.'
+      'Buru-buru mengisi detail kartu kredit Anda segera.',
+      'Abaikan desakan waktu buatan yang dirancang untuk merusak logika berpikir kritis Anda.',
+      'Teruskan kupon ke teman untuk mengecek keabsahannya.',
+      'Balas email meminta perpanjangan batas waktu.'
     ],
-    correctAnswerIndex: 2,
-    explanationEn: 'Legitimate jobs will never ask you to pay your own money to start working. This is a classic advance-fee task scam.',
-    explanationId: 'Pekerjaan yang sah tidak akan pernah meminta Anda membayar uang untuk mulai bekerja. Ini adalah penipuan tugas berkedok biaya di muka.',
-    category: 'Greed / Iming-iming'
+    correctAnswerIndex: 1,
+    explanationEn: 'Artificial scarcity and urgent deadlines compress decision times, forcing emotional mistakes before verification can occur.',
+    explanationId: 'Desakan waktu buatan mempersempit waktu berpikir, memaksa korban berbuat salah sebelum sempat melakukan verifikasi.',
+    category: 'Prize Scam'
   },
+
+  // --- 6. TECH SUPPORT SCAM ---
   {
     id: 'q11',
     difficulty: 'Medium',
-    scenarioEn: 'A pop-up on a website flashes: "WARNING! Your computer is infected with 5 viruses. Call Apple Support at 1-800-XXX-XXXX immediately!"',
-    scenarioId: 'Sebuah pop-up di situs web berkedip: "PERINGATAN! Komputer Anda terinfeksi 5 virus. Segera hubungi Dukungan Apple di 1-800-XXX-XXXX!"',
+    scenarioEn: 'A browser pop-up warning screams: "WINDOWS INFECTED WITH 5 VIRUS! Call security support at 1-800-SAFE immediately to prevent asset deletion!"',
+    scenarioId: 'Pop-up browser berbunyi: "WINDOWS TERINFEKSI 5 VIRUS! Hubungi dukungan keamanan di 1-800-SAFE segera untuk mencegah penghapusan aset!"',
     optionsEn: [
-      'Call the number to get help removing the viruses.',
-      'Click the pop-up to download the recommended antivirus.',
-      'Close the browser tab and run a scan with your actual installed antivirus.',
-      'Restart the computer and call the number later.'
+      'Call the line to get active software assistance.',
+      'Download the recommended cleaner tool extension immediately.',
+      'Close the browser process and run a verified local offline virus scan.',
+      'Restart the system and call the number.'
     ],
     optionsId: [
-      'Hubungi nomor tersebut untuk mendapatkan bantuan menghapus virus.',
-      'Klik pop-up untuk mengunduh antivirus yang disarankan.',
-      'Tutup tab browser dan jalankan pemindaian dengan antivirus asli yang terinstal.',
-      'Nyalakan ulang komputer dan hubungi nomor itu nanti.'
+      'Hubungi nomor tersebut untuk mendapatkan bantuan perangkat lunak aktif.',
+      'Unduh ekstensi pembersih yang disarankan segera.',
+      'Tutup proses browser dan jalankan pemindaian virus lokal offline yang terverifikasi.',
+      'Nyalakan ulang sistem lalu hubungi nomor telepon tersebut.'
     ],
     correctAnswerIndex: 2,
-    explanationEn: 'Tech support scams use scary pop-ups. Real OS warnings do not ask you to call a toll-free number.',
-    explanationId: 'Penipuan dukungan teknis menggunakan pop-up yang menakutkan. Peringatan OS asli tidak akan menyuruh Anda menelepon nomor bebas pulsa.',
-    category: 'Urgency / Desakan Waktu'
+    explanationEn: 'Tech support scams use scareware pop-ups to induce panic, pushing users to grant dangerous remote desktop control rights.',
+    explanationId: 'Penipuan tech support menggunakan pop-up menakutkan (scareware) untuk memaksa pengguna memberikan akses remote desktop yang berbahaya.',
+    category: 'Tech Support Scam'
   },
   {
     id: 'q12',
     difficulty: 'Expert',
-    scenarioEn: 'You tweet a complaint about a delayed flight. An account named "@CS_Airlines_Care" replies asking for your booking reference and passport photo via DM.',
-    scenarioId: 'Anda mencuit keluhan tentang penundaan penerbangan di Twitter. Akun bernama "@CS_Airlines_Care" membalas dan meminta kode booking serta foto paspor via DM.',
+    scenarioEn: 'A helpdesk engineer on the phone directs you to open the Windows Event Viewer log screen, pointing at common yellow warnings to prove your system hardware is corrupted.',
+    scenarioId: 'Seorang teknisi helpdesk via telepon mengarahkan Anda membuka log Windows Event Viewer, menunjuk pesan peringatan kuning biasa untuk membuktikan hardware Anda rusak.',
     optionsEn: [
-      'Send the details via DM so they can process your refund quickly.',
-      'Check the account for a verified badge and past tweet history before interacting.',
-      'Post the details publicly to shame the airline into acting faster.',
-      'Reply to the tweet and ask them to call you instead.'
+      'Purchase the software fix tool license they recommend.',
+      'Hang up; normal operational system warnings are manipulated by scammers to simulate system failures.',
+      'Grant them remote access to clear the log entries.',
+      'Provide your computer password for automatic debugging.'
     ],
     optionsId: [
-      'Kirim detail via DM agar mereka bisa memproses pengembalian dana dengan cepat.',
-      'Periksa akun tersebut apakah memiliki lencana terverifikasi dan riwayat cuitan sebelum berinteraksi.',
-      'Posting detail secara publik untuk mempermalukan maskapai agar bertindak lebih cepat.',
-      'Balas cuitan dan minta mereka menelepon Anda saja.'
+      'Beli lisensi alat perbaikan perangkat lunak yang mereka rekomendasikan.',
+      'Tutup telepon; log sistem operasional normal dimanipulasi oleh penipu untuk mensimulasikan kerusakan.',
+      'Berikan mereka akses jarak jauh untuk membersihkan entri log tersebut.',
+      'Berikan kata sandi komputer Anda untuk proses debugging otomatis.'
     ],
     correctAnswerIndex: 1,
-    explanationEn: 'Scammers monitor complaints to impersonate customer service. Always verify the authenticity of the account before sharing personal data.',
-    explanationId: 'Penipu memantau keluhan untuk menyamar sebagai layanan pelanggan. Selalu verifikasi keaslian akun sebelum membagikan data pribadi.',
-    category: 'Authority / Otoritas Palsu'
+    explanationEn: 'Scammers deploy the Event Viewer trick to present normal operational error histories as proof of a critical structural breach.',
+    explanationId: 'Penipu menggunakan trik Event Viewer untuk memanipulasi riwayat log normal sebagai bukti kerusakan fatal.',
+    category: 'Tech Support Scam'
   },
+
+  // --- 7. GOVERNMENT IMPERSONATION ---
   {
     id: 'q13',
-    difficulty: 'Expert',
-    scenarioEn: 'You receive an urgent late-night call from someone sounding exactly like your sibling, crying, saying they caused an accident and need bail money sent immediately.',
-    scenarioId: 'Anda menerima telepon darurat larut malam dari seseorang yang suaranya persis seperti saudara Anda, menangis, mengatakan ia menabrak orang dan butuh uang jaminan segera.',
+    difficulty: 'Medium',
+    scenarioEn: 'You receive an urgent call from someone claiming to be a tax officer, demanding an immediate wire transfer to a state account due to a critical tax evasion penalty.',
+    scenarioId: 'Anda menerima telepon darurat dari seseorang yang mengaku petugas pajak, menuntut transfer segera ke rekening negara karena denda pajak.',
     optionsEn: [
-      'Transfer the money immediately to get them out of trouble.',
-      'Stay on the line, but use another phone to call your sibling\'s actual number or parents.',
-      'Start crying and apologize that you have no money.',
-      'Ask the police officer on the phone to give you a discount on the bail.'
+      'Comply immediately to avoid heavy penalties or police lockups.',
+      'Hang up and verify directly through the official state tax domain office portal.',
+      'Argue with the agent and give your national security numbers.',
+      'Ask for a payment installment agreement.'
     ],
     optionsId: [
-      'Langsung transfer uang untuk mengeluarkan mereka dari masalah.',
-      'Tetap di telepon, tapi gunakan ponsel lain untuk menelepon nomor asli saudara atau orang tua Anda.',
-      'Ikut menangis dan minta maaf karena Anda tidak punya uang.',
-      'Minta polisi di telepon untuk memberi Anda diskon uang jaminan.'
+      'Patuhi segera untuk menghindari denda berat atau penahanan polisi.',
+      'Tutup telepon dan verifikasi langsung melalui portal domain resmi kantor pajak negara.',
+      'Berdebat dengan agen tersebut dan memberikan nomor identitas nasional Anda.',
+      'Minta perjanjian cicilan pembayaran.'
     ],
     correctAnswerIndex: 1,
-    explanationEn: 'AI voice cloning makes "grandparent scams" very realistic. Always verify the emergency by calling the person directly on their known number.',
-    explanationId: 'Kloning suara AI membuat penipuan kedaruratan sangat realistis. Selalu verifikasi keadaan darurat dengan menelepon orang tersebut langsung di nomor yang dikenal.',
-    category: 'Emotion / Manipulasi Emosi'
+    explanationEn: 'Official legal or revenue authorities communicate through formal written mail, never demanding immediate telephone cryptocurrency or banking wire actions.',
+    explanationId: 'Otoritas hukum resmi berkomunikasi melalui surat tertulis formal, tidak pernah menuntut tindakan transfer bank instan via telepon.',
+    category: 'Government Impersonation'
   },
   {
     id: 'q14',
     difficulty: 'Hard',
-    scenarioEn: 'An email from "IT Department" states your university email quota is full. It provides a link: "http://unsyiah-webmail-update.weebly.com" to upgrade storage.',
-    scenarioId: 'Email dari "Departemen IT" menyatakan kuota email universitas Anda penuh. Tersedia tautan: "http://unsyiah-webmail-update.weebly.com" untuk menambah penyimpanan.',
+    scenarioEn: 'An unknown chat profile sends an arrest warrant document with official police headers, stating you are implicated in money laundering and must relocate funds to a verification bunker account.',
+    scenarioId: 'Profil chat tak dikenal mengirim dokumen surat penangkapan berlogo kepolisian resmi, menyatakan Anda terlibat pencucian uang dan harus memindahkan dana ke rekening verifikasi.',
     optionsEn: [
-      'Click the link and log in so you do not lose your assignments.',
-      'Reply to the email with your password to let them upgrade it manually.',
-      'Ignore it because official university systems do not use free hosting subdomains like Weebly.',
-      'Forward it to all your classmates to warn them about the quota.'
+      'Transfer funds swiftly to clear your record with investigators.',
+      'Ignore it; law enforcement does not issue legal process notices or asset verification setups via instant messaging networks.',
+      'Reply to the chat requesting a digital meeting session.',
+      'Send photos of your local bank books to prove compliance.'
     ],
     optionsId: [
-      'Klik tautan dan masuk agar tugas-tugas Anda tidak hilang.',
-      'Balas email beserta kata sandi agar mereka bisa mengupgradenya secara manual.',
-      'Abaikan karena sistem resmi universitas tidak menggunakan subdomain hosting gratis seperti Weebly.',
-      'Teruskan ke semua teman sekelas untuk memperingatkan mereka tentang kuota.'
+      'Transfer dana dengan cepat untuk membersihkan nama Anda di mata penyelidik.',
+      'Abaikan; penegak hukum tidak menerbitkan surat perintah atau verifikasi aset melalui aplikasi pesan instan.',
+      'Balas chat tersebut meminta sesi pertemuan digital.',
+      'Kirim foto buku tabungan lokal Anda untuk membuktikan kepatuhan.'
     ],
-    correctAnswerIndex: 2,
-    explanationEn: 'Phishers often disguise attacks as IT alerts. The URL uses a free website builder (.weebly.com) instead of an official .ac.id domain.',
-    explanationId: 'Pelaku phising sering menyamarkan serangan sebagai peringatan IT. URL tersebut menggunakan pembuat situs web gratis (.weebly.com) alih-alih domain resmi kampus.',
-    category: 'Authority / Otoritas Palsu'
+    correctAnswerIndex: 1,
+    explanationEn: 'Scammers forge official headers and legal terminology to trigger institutional fear, making victims bypass normal transaction verification protocols.',
+    explanationId: 'Penipu memalsukan kop surat dan bahasa hukum untuk memicu rasa takut, membuat korban melewati protokol verifikasi transaksi normal.',
+    category: 'Government Impersonation'
   },
   {
     id: 'q15',
-    difficulty: 'Easy',
-    scenarioEn: 'An influencer you follow on Instagram posts a story: "I am giving away 5 iPhone 15s! Just pay $10 for shipping at this link to claim yours!"',
-    scenarioId: 'Influencer yang Anda ikuti di Instagram memposting story: "Saya membagikan 5 iPhone 15! Cukup bayar $10 untuk ongkir di link ini untuk mengklaim milikmu!"',
+    difficulty: 'Expert',
+    scenarioEn: 'You receive an urgent message from a high-ranking judge profile on WhatsApp stating a legal subpoena has been issued against your assets and demands immediate cash escrow processing.',
+    scenarioId: 'Anda menerima pesan mendesak dari profil hakim tinggi di WhatsApp yang menyatakan panggilan pengadilan telah diterbitkan terhadap aset Anda dan menuntut proses jaminan tunai.',
     optionsEn: [
-      'Pay the $10 shipping fee; it is a great deal for a new phone.',
-      'Send a DM to thank the influencer for their generosity.',
-      'Assume the influencer\'s account was hacked and report the story as a scam.',
-      'Tag your friends in the comments so they can win too.'
+      'Process the payment immediately out of institutional respect.',
+      'Block the profile; real courts never coordinate escrow instructions or asset legal updates via personal instant messengers.',
+      'Send your bank statements for analysis.',
+      'Ask a friend to finance the escrow setup.'
     ],
     optionsId: [
-      'Bayar ongkos kirim $10; ini kesepakatan bagus untuk ponsel baru.',
-      'Kirim DM untuk berterima kasih kepada influencer atas kemurahan hatinya.',
-      'Berasumsi bahwa akun influencer telah diretas dan laporkan story tersebut sebagai penipuan.',
-      'Tandai teman Anda di kolom komentar agar mereka juga bisa menang.'
+      'Proses pembayaran segera demi menghormati institusi hukum.',
+      'Blokir profil tersebut; pengadilan asli tidak pernah mengatur instruksi jaminan atau pembaruan hukum aset via aplikasi chat pribadi.',
+      'Kirim rekening koran bank Anda untuk dianalisis.',
+      'Minta teman untuk mendanai biaya jaminan tersebut.'
     ],
-    correctAnswerIndex: 2,
-    explanationEn: 'Account takeovers are common. Legitimate giveaways never require you to pay upfront shipping fees via suspicious external links.',
-    explanationId: 'Peretasan akun sering terjadi. Giveaway yang sah tidak pernah mengharuskan Anda membayar ongkos kirim di muka melalui tautan eksternal yang mencurigakan.',
-    category: 'Greed / Iming-iming'
+    correctAnswerIndex: 1,
+    explanationEn: 'Judicial entities follow strict, physical legal service architectures and never employ digital chat environments to negotiate asset security bonds.',
+    explanationId: 'Entitas peradilan mengikuti prosedur hukum fisik yang ketat dan tidak pernah menggunakan media chat digital untuk menegosiasikan jaminan aset.',
+    category: 'Government Impersonation'
   }
 ];
