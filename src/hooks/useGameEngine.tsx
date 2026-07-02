@@ -9,6 +9,7 @@ export interface ScoreLog {
   score: number;
   badge: string;
   date: string;
+  testType: string; // <-- FITUR 4: Menyimpan status Pre/Post Test
 }
 
 interface GameEngineState {
@@ -34,8 +35,7 @@ interface GameEngineState {
   resetGame: () => void;
   unlockAchievement: (achievement: string) => void;
   unlockAdvancedLevel: () => void;
-  // UPDATE: Tambahin customName di parameter loginAs
-  loginAs: (selectedRole: UserRole, customName?: string) => void;
+  loginAs: (selectedRole: UserRole, customName?: string, selectedTestType?: 'Pre-Test' | 'Post-Test') => void;
   logout: () => void;
   saveScoreLog: (badge: string) => void;
   recordMistake: (category: string) => void;
@@ -50,16 +50,15 @@ const GameEngineContext = createContext<GameEngineState | undefined>(undefined);
 export function GameEngineProvider({ children }: { children: ReactNode }) {
   const [userPoints, setUserPoints] = useState<number>(0);
   const [masteredCount, setMasteredCount] = useState<number>(0);
-  const [currentMode, setCurrentMode] = useState<GameMode>('welcome'); 
-  const [playerName, setPlayerName] = useState<string>("Siswa Anonim");
+  const [currentMode, setCurrentMode] = useState<GameMode>('welcome');
+  const [playerName, setPlayerName] = useState<string>("Agent Anonim");
   const [testType, setTestType] = useState<'Pre-Test' | 'Post-Test'>('Pre-Test');
   const [achievements, setAchievements] = useState<string[]>([]);
   const [isAdvancedLevelUnlocked, setIsAdvancedLevelUnlocked] = useState<boolean>(false);
   const [role, setRole] = useState<UserRole>('guest');
   const [scoreLogs, setScoreLogs] = useState<ScoreLog[]>([]);
   const [mistakes, setMistakes] = useState<Record<string, number>>({});
-
-  const [streakCount] = useState<number>(3); 
+  const [streakCount] = useState<number>(3);
   const [quizCorrectToday, setQuizCorrectToday] = useState<number>(0);
   const [simCompletedToday, setSimCompletedToday] = useState<boolean>(false);
   const [isQuizClaimed, setIsQuizClaimed] = useState<boolean>(false);
@@ -70,31 +69,30 @@ export function GameEngineProvider({ children }: { children: ReactNode }) {
     setTestType(type);
   };
 
-  // UPDATE LOGIKA LOGIN: Tangkap nama dinamis dari input form
-  const loginAs = (selectedRole: UserRole, customName?: string) => {
+  const loginAs = (selectedRole: UserRole, customName?: string, selectedTestType?: 'Pre-Test' | 'Post-Test') => {
     setRole(selectedRole);
+    if (selectedTestType) setTestType(selectedTestType);
+    
     if (selectedRole === 'admin') {
       setPlayerName("Sistem Admin");
       setCurrentMode('admin');
     } else {
-      // Kalau user nggak ngisi nama, default ke "Agent Anonim"
       const finalName = customName && customName.trim() !== "" ? customName : "Agent Anonim";
       setPlayerName(finalName);
       setCurrentMode('home');
     }
   };
 
-  // UPDATE LOGIKA LOGOUT: Balik ke halaman login, bukan welcome!
   const logout = () => {
     setRole('guest');
-    setCurrentMode('login'); 
+    setCurrentMode('login');
     resetGame();
   };
 
   const addPoints = (points: number) => setUserPoints((prev) => prev + points);
   const incrementMastered = () => setMasteredCount((prev) => prev + 1);
   const setMode = (mode: GameMode) => setCurrentMode(mode);
-  
+
   const unlockAchievement = (newAchievement: string) => {
     setAchievements((prev) => {
       if (!prev.includes(newAchievement)) return [...prev, newAchievement];
@@ -108,10 +106,11 @@ export function GameEngineProvider({ children }: { children: ReactNode }) {
     setScoreLogs((prev) => [
       {
         id: Date.now(),
-        name: playerName, // Karena nama dinamis, skor di admin bakal beda-beda sesuai yang main
+        name: playerName,
         score: userPoints,
         badge: highestBadge,
         date: new Date().toLocaleTimeString(),
+        testType: testType
       },
       ...prev
     ]);
@@ -125,17 +124,12 @@ export function GameEngineProvider({ children }: { children: ReactNode }) {
   };
 
   const getWeakestCategory = () => {
-    if (Object.keys(mistakes).length === 0) return "Tidak Ada (Sempurna!)";
+    if (Object.keys(mistakes).length === 0) return "Aman (Secure)";
     return Object.keys(mistakes).reduce((a, b) => mistakes[a] > mistakes[b] ? a : b);
   };
 
-  const addQuizCorrectProgress = (count: number) => {
-    setQuizCorrectToday((prev) => Math.min(3, prev + count));
-  };
-
-  const triggerSimComplete = () => {
-    setSimCompletedToday(true);
-  };
+  const addQuizCorrectProgress = (count: number) => setQuizCorrectToday((prev) => Math.min(3, prev + count));
+  const triggerSimComplete = () => setSimCompletedToday(true);
 
   const claimMissionReward = (type: 'quiz' | 'sim') => {
     if (type === 'quiz' && !isQuizClaimed && quizCorrectToday >= 3) {
