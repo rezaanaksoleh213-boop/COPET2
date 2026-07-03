@@ -143,7 +143,7 @@ export function VocabView() {
                 <h3 className="text-lg font-bold font-mono text-slate-200 group-hover:text-teal-400 mb-2">
                   {cat.toUpperCase()}
                 </h3>
-                <p className="text-xs text-slate-500 font-mono">5 Terminologies</p>
+                <p className="text-xs text-slate-500 font-mono">10 Terminologies</p>
               </button>
             ))}
           </motion.div>
